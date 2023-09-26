@@ -10,7 +10,7 @@ class TrouverPlanteController extends AbstractController
 {
 
     // Action qui AFFICHE le formulaire
-    #[Route("/plante/index")]
+   
     #[Route('/plante/trouver_une_plante', name:'maPlante')]
     public function planteIndex()
     {

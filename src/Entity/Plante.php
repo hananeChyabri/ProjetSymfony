@@ -68,6 +68,9 @@ class Plante
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $croissance = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $description = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -285,6 +288,18 @@ class Plante
     public function setCroissance(?string $croissance): static
     {
         $this->croissance = $croissance;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }
