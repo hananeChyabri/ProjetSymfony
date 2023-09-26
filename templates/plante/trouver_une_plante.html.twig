@@ -1,21 +1,212 @@
 {% extends "base.html.twig" %}
 
+{% block stylesheets %}
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Montserrat &display=swap');
+
+		body {
+			max-width: 1200px;
+			margin: auto;
+			padding: 16px;
+			font-family: 'Montserrat', sans-serif;
+		}
+
+		header {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			margin-bottom: 16px;
+			padding: 8px;
+			background-color: #7451eb;
+			text-align: center;
+			color: white;
+		}
+
+		header img {
+			height: 60px;
+			margin-left: 1rem;
+		}
+
+		header h1 {
+			flex-grow: 1;
+		}
+
+		main {
+			display: flex;
+			flex-direction: row;
+		}
+
+		.filtres {
+			border-radius: 4px;
+			box-shadow: 0 0 4px gray;
+			margin: 8px;
+			padding: 8px;
+			min-width: 300px;
+			min-height: 400px;
+		}
+
+		.filtres h3 {
+			text-align: center;
+			font-size: 70px;
+		}
+
+		.fiches {
+			flex: 1;
+			margin: 8px;
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 4px;
+		}
+
+		.fiches article {
+			border: 1px solid black;
+			padding: 4px;
+		}
+
+		.fiches article img {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			max-width: 200px;
+		}
+
+		.fiches article p {
+			margin-top: 4px;
+			margin-bottom: 4px;
+		}
+
+		.fiches article h2 {
+			text-align: center;
+		}
+	</style>
+{% endblock %}
 {% block body %}
 
 	<main>
-			<!-- Menu de recherche -->
-			<section class="filtres">
-				<h3 >Filtres</h3>
-				<button class="btn-trier">Trier par prix croissant</button>
-				<br>
-				
-			</section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<!-- Première Section -->
+					<!-- Menu de filtres -->
 
-			<!-- Fiches produits -->
-			<section class="fiches">
-            <article><img src="">ffff</article>
-	
-			</section>
-		</main>
-</form>
-{% endblock %}
+
+						<section class="filtres"> <h3>Filtres</h3>
+
+
+						<div class="accordion" id="accordionPanelsStayOpenExample">
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="panelsStayOpen-headingOne">
+									<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+										Quel type de plante ?
+									</button>
+								</h2>
+								<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+									<div class="accordion-body">
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+											<label class="form-check-label" for="flexCheckChecked">Arbre</label>
+										</div>
+
+										<!-- Checked checkbox -->
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked/>
+											<label class="form-check-label" for="flexCheckChecked">Arbuste</label>
+										</div>
+
+										<!-- Checked checkbox -->
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked/>
+											<label class="form-check-label" for="flexCheckChecked">Plante ornementale</label>
+										</div>
+
+										<!-- Checked checkbox -->
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked/>
+											<label class="form-check-label" for="flexCheckChecked">Fruit</label>
+										</div>
+
+										<!-- Checked checkbox -->
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked/>
+											<label class="form-check-label" for="flexCheckChecked">Légume</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+										Exposition
+									</button>
+								</h2>
+								<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+									<div class="accordion-body">
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+											<label class="form-check-label" for="flexCheckChecked">Soleil
+											</label>
+										</div>
+
+										<!-- Checked checkbox -->
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked/>
+											<label class="form-check-label" for="flexCheckDefault">Mi-ombre
+											</label>
+										</div>
+
+										<!-- Checked checkbox -->
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked/>
+											<label class="form-check-label" for="flexCheckChecked">Ombre
+											</label>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="panelsStayOpen-headingThree">
+									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+										Besoin en eau
+									</button>
+								</h2>
+								<div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+									<div class="accordion-body">
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+											<label class="form-check-label" for="flexCheckChecked">Faible</label>
+										</div>
+
+										<!-- Checked checkbox -->
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked/>
+											<label class="form-check-label" for="flexCheckChecked">Moyen</label>
+										</div>
+
+										<!-- Checked checkbox -->
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked/>
+											<label class="form-check-label" for="flexCheckChecked">Difficile</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					</section>
+				</div>
+				<div
+					class="col-md-9">
+					<!-- Deuxième Section -->
+					<section class="fiches">
+						<article><img src="">ffff</article>
+
+					</section>
+				</div>
+			</div>
+		</div>
+	</main>
+
+</main></form>{% endblock %}

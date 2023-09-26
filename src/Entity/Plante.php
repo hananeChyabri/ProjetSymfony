@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PlanteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -71,6 +73,34 @@ class Plante
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $typePlante = null;
+
+    #[ORM\OneToMany(mappedBy: 'plante', targetEntity: PlanteProfil::class, orphanRemoval: true)]
+    private Collection $PlantesProfil;
+
+    #[ORM\OneToMany(mappedBy: 'plante', targetEntity: Image::class, orphanRemoval: true)]
+    private Collection $images;
+
+
+
+    public function hydrate(array $vals)
+    {
+        foreach ($vals as $cle => $valeur) {
+            if (isset($vals[$cle])) {
+                $nomSet = "set" . ucfirst($cle);
+                $this->$nomSet($valeur);
+            }
+        }
+    }
+
+
+    public function __construct(array $init = [])
+    {
+        $this->hydrate($init);
+        $this->PlantesProfil = new ArrayCollection();
+        $this->images = new ArrayCollection();
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -300,6 +330,78 @@ class Plante
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getTypePlante(): ?string
+    {
+        return $this->typePlante;
+    }
+
+    public function setTypePlante(?string $typePlante): static
+    {
+        $this->typePlante = $typePlante;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PlanteProfil>
+     */
+    public function getPlantesProfil(): Collection
+    {
+        return $this->PlantesProfil;
+    }
+
+    public function addPlantesProfil(PlanteProfil $plantesProfil): static
+    {
+        if (!$this->PlantesProfil->contains($plantesProfil)) {
+            $this->PlantesProfil->add($plantesProfil);
+            $plantesProfil->setPlante($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlantesProfil(PlanteProfil $plantesProfil): static
+    {
+        if ($this->PlantesProfil->removeElement($plantesProfil)) {
+            // set the owning side to null (unless already changed)
+            if ($plantesProfil->getPlante() === $this) {
+                $plantesProfil->setPlante(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): static
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setPlante($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): static
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getPlante() === $this) {
+                $image->setPlante(null);
+            }
+        }
 
         return $this;
     }
