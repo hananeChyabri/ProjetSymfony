@@ -13,6 +13,7 @@ class PlanteFixtures extends Fixture
     {
         $faker = Factory::create();
         //type de feuillage
+        $nomsPlantes = ['Rose', 'Tulipe', 'Lavande', 'Orchidée', 'Lilas', 'Hortensia', 'Jonquille', 'Pivoine', 'Aloe Vera', 'Fougère', 'Bonsaï', 'Bambou'];
         $typeFeuillage = array("Persistant", "Caduc");
         $familleBotanique = array("Rosacées", "Liliacées", "Asteracées ou Composées", "Poacées ou Graminées", "Fabacées ou Légumineuses", "Solanacées", "Orchidacées", "Ericacées", "Cactacées", "Lauracées", "Poacées ou Orchidées", "Cucurbitacées", "Ranunculacées");
         $typePlante = array("Arbre", "Arbuste", "Plante ornementale", "Fruit", "Légume", "Aromatique", "Médicinale", "Plante de bassin");
@@ -27,9 +28,10 @@ class PlanteFixtures extends Fixture
         $phSol = array("Alcalin ", "Neutre", "Acide ");
         $croissance = array("Lente", "Normale", "Rapide");
 
-        for ($i = 0; $i < 2; $i++) {
+        for ($i = 0; $i < 11; $i++) {
             $plante = new Plante(
                 [
+                    'nom' => $nomsPlantes[mt_rand(0, count($nomsPlantes) - 1)],
                     'familleBotanique' => $familleBotanique[mt_rand(0, count($familleBotanique) - 1)],
                     'origin' => $faker->country(),
                     'typeDeFeuillage' => $typeFeuillage[mt_rand(0, count($typeFeuillage) - 1)],

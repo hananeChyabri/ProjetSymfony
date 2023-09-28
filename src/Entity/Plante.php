@@ -17,6 +17,9 @@ class Plante
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $familleBotanique = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -81,6 +84,7 @@ class Plante
 
     #[ORM\OneToMany(mappedBy: 'plante', targetEntity: Image::class, orphanRemoval: true)]
     private Collection $images;
+
 
 
 
@@ -402,6 +406,18 @@ class Plante
                 $image->setPlante(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(?string $nom): static
+    {
+        $this->nom = $nom;
 
         return $this;
     }
