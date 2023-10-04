@@ -51,7 +51,7 @@ class Plante
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $exposition = null;
-
+   
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $besoinEau = null;
 

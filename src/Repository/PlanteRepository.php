@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Plante;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use SebastianBergmann\Environment\Console;
 
 /**
  * @extends ServiceEntityRepository<Plante>
@@ -45,4 +46,40 @@ class PlanteRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+
+ // méthode propre: recherche par filtres
+ public function recherchePlanteFiltres($filtres)
+ {
+
+
+
+
+     $em = $this->getEntityManager();
+  
+
+     $query = $em->createQuery (
+             "SELECT plante FROM App\Entity\Plante plante
+             WHERE
+             (plante.exposition IN (:exposition)
+             AND 
+             plante.besoinEau IN (:besoinEau)
+             AND 
+             plante.lieuCultive IN (:lieuCultive))
+           
+             "
+     );
+
+     
+    
+   
+    //  dd($filtres['exposition']);
+     $query->setParameter("exposition", $filtres['exposition']);
+     $query->setParameter("besoinEau", $filtres['besoinEau']);
+     $query->setParameter("lieuCultive", $filtres['lieuCultive']);
+     $res = $query->getResult();
+     return $res;
+ }
+
 }
