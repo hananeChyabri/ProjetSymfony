@@ -55,7 +55,7 @@ class TrouverPlanteController extends AbstractController
          
           
             $response = $serializer->serialize($plantes, 'json', [AbstractNormalizer::IGNORED_ATTRIBUTES => ['images']]);
-            // $response = $serializer->serialize($plantes, 'json');
+         
 
             return new Response ($response);
 
