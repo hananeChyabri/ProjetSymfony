@@ -33,12 +33,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $nom = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: PlanteProfil::class, orphanRemoval: true)]
-    private Collection $PlantesProfil;
+    #[ORM\ManyToMany(targetEntity: Plante::class, mappedBy: 'relation')]
+    private Collection $plantes;
+
+   
 
     public function __construct()
     {
-        $this->PlantesProfil = new ArrayCollection();
+        $this->plantes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -123,31 +125,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+ 
+
     /**
-     * @return Collection<int, PlanteProfil>
+     * @return Collection<int, Plante>
      */
-    public function getPlantesProfil(): Collection
+    public function getPlantes(): Collection
     {
-        return $this->PlantesProfil;
+        return $this->plantes;
     }
 
-    public function addPlantesProfil(PlanteProfil $plantesProfil): static
+    public function addPlante(Plante $plante): static
     {
-        if (!$this->PlantesProfil->contains($plantesProfil)) {
-            $this->PlantesProfil->add($plantesProfil);
-            $plantesProfil->setUser($this);
+        if (!$this->plantes->contains($plante)) {
+            $this->plantes->add($plante);
+            $plante->addRelation($this);
         }
 
         return $this;
     }
 
-    public function removePlantesProfil(PlanteProfil $plantesProfil): static
+    public function removePlante(Plante $plante): static
     {
-        if ($this->PlantesProfil->removeElement($plantesProfil)) {
-            // set the owning side to null (unless already changed)
-            if ($plantesProfil->getUser() === $this) {
-                $plantesProfil->setUser(null);
-            }
+        if ($this->plantes->removeElement($plante)) {
+            $plante->removeRelation($this);
         }
 
         return $this;

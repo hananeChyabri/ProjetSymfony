@@ -25,9 +25,7 @@ class TrouverPlanteController extends AbstractController
 
         $formulaireFiltrePlante = $this->createForm(FiltrePlanteType::class);
 
-        $formulaireFiltrePlante->handleRequest($req);
-
- 
+        $formulaireFiltrePlante->handleRequest($req);   
 
         if ($formulaireFiltrePlante->isSubmitted() && $formulaireFiltrePlante->isValid()) {
        

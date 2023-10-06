@@ -14,8 +14,6 @@
 		<!-- Menu de recherche -->
 		<section class="filtres">
 			<h3>Filtres</h3>
-
-
 			<div class="accordion" id="accordionPanelsStayOpenExample">
 				{{ form_start(form, {'attr': {'id': 'filtre-form-plante'}}) }}
 				<div class="accordion-item">
@@ -58,10 +56,10 @@
 					</div>
 				</div>
 
-					<div class="accordion-item">
+				<div class="accordion-item">
 					<h2 class="accordion-header" id="panelsStayOpen-headingThree">
 						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-							Besoin eau
+							Pour cultiver où ?
 						</button>
 					</h2>
 					<div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
@@ -79,49 +77,45 @@
 				</div>
 				{{ form_end(form) }}
 			</div>
+		</section>
+
+		<!-- Fiches produits -->
+		<section
+			class="fiches">
+			<!-- Code ajouté -->
+
+			{% for plante in listePlantes %}
+				<article>
+
+					{% for image in plante.images %}
+
+						{# <img src="{{ asset('images/plante1.jpg') }}" alt="Description de l'image"> #}
+						<img src="{{ asset(image.url) }}" alt="Description de l'image">
+					{% endfor %}
+					<h2>{{ plante.nom }}<h2>
+							<button class="add_wish_list" data-id="{{ plante.id }}">like</button>
+
+						</article>
 
 
-			
-	</section>
-
-	<!-- Fiches produits -->
-	<section
-		class="fiches">
-		<!-- Code ajouté -->
-
-		{% for plante in listePlantes %}
-			<article>
-
-				{% for image in plante.images %}
-
-					{# <img src="{{ asset('images/plante1.jpg') }}" alt="Description de l'image"> #}
-					<img src="{{ asset(image.url) }}" alt="Description de l'image">
-				{% endfor %}
-				<h2>{{ plante.nom }}<h2></article>
+					{% endfor %}
 
 
-				{% endfor %}
+				</section>
+			</main>
 
 
-			</section>
-		</main>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js" integrity="sha512-emSwuKiMyYedRwflbZB2ghzX8Cw8fmNVgZ6yQNNXXagFzFOaQmbvQ1vmDkddHjm5AITcBIZfC7k4ShQSjgPAmQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+			<script>
 
-
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js" integrity="sha512-emSwuKiMyYedRwflbZB2ghzX8Cw8fmNVgZ6yQNNXXagFzFOaQmbvQ1vmDkddHjm5AITcBIZfC7k4ShQSjgPAmQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-		<script>
-
-
-			// on obtient le formulaire pour
+				// Axiox pour filtrer les plantes
+// on obtient le formulaire pour
 const form = document.getElementById('filtre-form-plante');
 
 // on detectera tous les inputs du form, peu importe quel fitre on change
 form.addEventListener('change', function (event) {
 event.preventDefault();
 // obtenir le div pour afficher les résultats
-
-
-console.log("appel recherche...");
-
 
 axios({
 url: '{{ path ("maPlante") }}',
@@ -150,7 +144,7 @@ const planteElement = document.createElement("article");
 
 // nom de la plante
 const nomPlante = document.createElement("P");
-nomPlante.innerText = plante.nom + " " + plante.exposition+"   "+plante.besoinEau+"   "+plante.lieuCultive;
+nomPlante.innerText = plante.nom + " " + plante.exposition + "   " + plante.besoinEau + "   " + plante.lieuCultive;
 
 const imagePlante = document.createElement("img");
 // image de la plante
@@ -172,5 +166,36 @@ planteElement.appendChild(nomPlante);
 console.error(error);
 });
 });
-		</script>
-	{% endblock %}
+
+
+// Axiox pour ajouter au liste de souhait
+
+
+
+var boutons = document.querySelectorAll('.add_wish_list');
+
+// Parcourez la liste des boutons et ajoutez un écouteur d'événements à chacun
+boutons.forEach(function(bouton) {
+  bouton.addEventListener('click', function() {
+    // Code à exécuter lorsque le bouton est cliqué
+    console.log("Bouton cliqué !");
+
+event.preventDefault();
+const planteId = event.target.getAttribute('data-id');
+
+
+
+
+
+// Envoyez une requête Axios pour ajouter la plante à la liste de souhaits
+ axios.post (`/plante/listSouhait/${planteId}`).then(function (response) { // Gérez la réponse du serveur (par exemple, actualisez l'interface utilisateur)
+console.log(response);
+}).catch(function (error) {
+console.error('Une erreur s\'est produite lors de l\'ajout à la liste de souhaits', error);
+}); 
+
+
+});
+});
+			</script>
+		{% endblock %}

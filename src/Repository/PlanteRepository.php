@@ -6,6 +6,7 @@ use App\Entity\Plante;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use SebastianBergmann\Environment\Console;
+use Symfony\Component\Validator\Constraints\Length;
 
 /**
  * @extends ServiceEntityRepository<Plante>
@@ -22,64 +23,92 @@ class PlanteRepository extends ServiceEntityRepository
         parent::__construct($registry, Plante::class);
     }
 
-//    /**
-//     * @return Plante[] Returns an array of Plante objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Plante[] Returns an array of Plante objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('p.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Plante
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
-
-
-
- // méthode propre: recherche par filtres
- public function recherchePlanteFiltres($filtres)
- {
+    //    public function findOneBySomeField($value): ?Plante
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 
 
 
+    // méthode propre: recherche par filtres
+    public function recherchePlanteFiltres($filtres)
+    {
 
-     $em = $this->getEntityManager();
-  
 
-     $query = $em->createQuery (
-             "SELECT plante FROM App\Entity\Plante plante
-             WHERE
-             (plante.exposition IN (:exposition)
-             AND 
-             plante.besoinEau IN (:besoinEau)
-             AND 
-             plante.lieuCultive IN (:lieuCultive))
-           
-             "
-     );
 
-     
-    
-   
-    //  dd($filtres['exposition']);
-     $query->setParameter("exposition", $filtres['exposition']);
-     $query->setParameter("besoinEau", $filtres['besoinEau']);
-     $query->setParameter("lieuCultive", $filtres['lieuCultive']);
-     $res = $query->getResult();
-     return $res;
- }
+        $em = $this->getEntityManager();
+        //  $query = $em->createQuery (
+        //          "SELECT plante FROM App\Entity\Plante plante
+        //          WHERE
 
+        //             (plante.exposition IN (:exposition) OR :exposition IS NULL)
+        //             AND
+        //             (plante.besoinEau IN (:besoinEau) OR :besoinEau IS NULL) "
+        //  );
+
+
+
+        //  $query->setParameter("exposition", $filtres['exposition']);
+
+        //  $query->setParameter("besoinEau", $filtres['besoinEau']);
+        // //  $query->setParameter("lieuCultive", $filtres['lieuCultive']);
+
+
+        $dql = 'SELECT plante FROM App\Entity\Plante plante';
+        $exposition = $filtres['exposition']; /* Récupérez la valeur du filtre exposition */;
+        $besoinEau = $filtres['besoinEau'];/* Récupérez la valeur du filtre besoin eau */;
+        $lieuCultive = $filtres['lieuCultive'];/* Récupérez la valeur du filtre lieuCultive */;
+        if ($exposition) {
+
+            $dql .= ' WHERE plante.exposition IN (:exposition)';
+        }
+
+        if ($besoinEau) {
+
+            $dql .= ($exposition ? ' AND' : ' WHERE') . ' plante.besoinEau IN (:besoinEau)';
+        }
+        if ($lieuCultive) {
+
+            $dql .= ($exposition ? ' AND' : ' WHERE') . ' plante.lieuCultive IN (:lieuCultive)';
+        }
+        $query = $em->createQuery($dql);
+
+        if ($exposition) {
+
+            $query->setParameter('exposition', $filtres['exposition']);
+        }
+        if ($besoinEau) {
+
+            $query->setParameter('besoinEau', $filtres['besoinEau']);
+        }
+        if ($lieuCultive) {
+
+            $query->setParameter('lieuCultive', $filtres['lieuCultive']);
+        }
+
+
+
+        $resultats = $query->getResult();
+        return $resultats;
+    }
 }

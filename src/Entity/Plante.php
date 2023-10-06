@@ -79,11 +79,13 @@ class Plante
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $typePlante = null;
 
-    #[ORM\OneToMany(mappedBy: 'plante', targetEntity: PlanteProfil::class, orphanRemoval: true)]
-    private Collection $PlantesProfil;
+  
 
     #[ORM\OneToMany(mappedBy: 'plante', targetEntity: Image::class, orphanRemoval: true)]
     private Collection $images;
+
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'plantes')]
+    private Collection $relation;
 
 
 
@@ -104,6 +106,7 @@ class Plante
         $this->hydrate($init);
         $this->PlantesProfil = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->relation = new ArrayCollection();
     }
     public function getId(): ?int
     {
@@ -350,35 +353,7 @@ class Plante
         return $this;
     }
 
-    /**
-     * @return Collection<int, PlanteProfil>
-     */
-    public function getPlantesProfil(): Collection
-    {
-        return $this->PlantesProfil;
-    }
-
-    public function addPlantesProfil(PlanteProfil $plantesProfil): static
-    {
-        if (!$this->PlantesProfil->contains($plantesProfil)) {
-            $this->PlantesProfil->add($plantesProfil);
-            $plantesProfil->setPlante($this);
-        }
-
-        return $this;
-    }
-
-    public function removePlantesProfil(PlanteProfil $plantesProfil): static
-    {
-        if ($this->PlantesProfil->removeElement($plantesProfil)) {
-            // set the owning side to null (unless already changed)
-            if ($plantesProfil->getPlante() === $this) {
-                $plantesProfil->setPlante(null);
-            }
-        }
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection<int, Image>
@@ -418,6 +393,30 @@ class Plante
     public function setNom(?string $nom): static
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getRelation(): Collection
+    {
+        return $this->relation;
+    }
+
+    public function addRelation(User $relation): static
+    {
+        if (!$this->relation->contains($relation)) {
+            $this->relation->add($relation);
+        }
+
+        return $this;
+    }
+
+    public function removeRelation(User $relation): static
+    {
+        $this->relation->removeElement($relation);
 
         return $this;
     }
