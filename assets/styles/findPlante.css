@@ -21,7 +21,7 @@ header {
 }
 
 header img {
-    height: 60px;
+    height: 20px;
     margin-left: 1rem;
 }
 
@@ -75,4 +75,18 @@ main {
 
 .fiches article h2 {
     text-align: center;
+}
+
+
+
+.favorite-button {
+    background-color: #40573e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.favorite-button:hover {
+    background-color: #182218;
 }

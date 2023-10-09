@@ -3,7 +3,7 @@
 	<div class="container d-flex align-items-center">
 
 		<h1 class="logo me-auto">
-			<a href="index.html">Plantes</a>
+			<a class="nav-link scrollto" href="{{ path('maPlante') }}">Plantes</a>
 		</h1>
 		<!-- Uncomment below if you prefer to use an image logo -->
 		<!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -11,7 +11,7 @@
 		<nav id="navbar" class="navbar">
 			<ul>
 				<li>
-					<a class="nav-link scrollto active" href="#hero">Home</a>
+					<a class="nav-link scrollto active" href="{{ path('maPlante') }}">Home</a>
 				</li>
 				<li>
 					<a class="nav-link scrollto" href="#about">About</a>
@@ -20,13 +20,34 @@
 					<a class="nav-link scrollto" href="{{ path('maPlante') }}">
 						Trouver une plante</a>
 				</li>
-	
 
-			</ul>
-			<i class="bi bi-list mobile-nav-toggle"></i>
-		</nav>
-		<!-- .navbar -->
+				<li>
 
-	</div>
-</header>
-<!-- End Header -->
+
+					<a class="nav-link scrollto" href="{{ path('app_register') }}">
+						Inscription</a>
+				</li>
+				<li>
+					<a class="nav-link scrollto" href="{{ path('app_login') }}">
+						login</a>
+				</li>
+					<li>
+					<a href="{{ path('app_logout') }}">Logout</a>
+				</li>
+			</div>
+
+
+		</li>
+
+
+		<li>
+
+			<a id="favorite_list_button" data-route="/plante/favorit_plantes/" href="#"><img src="/images/icon/heart.png" alt=""><span id="favorite_list">1</span>
+			</a>
+		</li>
+
+
+	</ul>
+	<i class="bi bi-list mobile-nav-toggle"></i>
+</nav>
+<!-- .navbar --></div></header><!-- End Header -->

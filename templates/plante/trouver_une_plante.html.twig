@@ -10,6 +10,8 @@
 		<!-- Menu de recherche -->
 		<section class="filtres">
 			<h3>Filtres</h3>
+
+
 			<div class="accordion" id="accordionPanelsStayOpenExample">
 				{{ form_start(form, {'attr': {'id': 'filtre-form-plante',
 											'data-route': path("maPlante") }}) }}
@@ -90,17 +92,22 @@
 						<img src="{{ asset(image.url) }}" alt="Description de l'image">
 					{% endfor %}
 					<h2>{{ plante.nom }}<h2>
-							<button class="add_wish_list" data-id="{{ plante.id }}">like</button>
+							{# <button class="add_wish_list" data-id="{{ plante.id }}">like</button> #}
+
+							<button class="favorite-button" data-id="{{ plante.id }}">
+								<i class="fas fa-heart"></i>
+								j'aime
+							</button>
 
 						</article>
 
 
-			{% endfor %}
+					{% endfor %}
 
 
-		</section>
-	</main>
-	{% block customJS %}
-		{{ encore_entry_script_tags('findPlante') }}
-	{% endblock %}
-{% endblock %}
+				</section>
+			</main>
+			{% block customJS %}
+				{{ encore_entry_script_tags('findPlante') }}
+			{% endblock %}
+		{% endblock %}

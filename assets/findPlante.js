@@ -1,6 +1,6 @@
 import './styles/findPlante.css';
 
-alert("ggg");
+
 
 
 
@@ -24,39 +24,13 @@ form.addEventListener('change', function (event) {
     }).then(function (response) {
 
 
-        let sectionPlante = document.querySelector(".fiches");
+
 
         // parcourir l'array d'objets reçu (car le JSON a été déjà parsé par AXIOS)
         let arrayPlantes = response.data;
 
-        console.log(arrayPlantes);
+        genererPlante(arrayPlantes);
 
-
-        sectionPlante.innerHTML = "";
-
-
-        arrayPlantes.forEach(function (plante) { // manipuler le DOM. Ex: vider un div et le remplir avec les résultats
-            console.log(plante);
-            const planteElement = document.createElement("article");
-
-            // nom de la plante
-            const nomPlante = document.createElement("P");
-            nomPlante.innerText = plante.nom + " " + plante.exposition + "   " + plante.besoinEau + "   " + plante.lieuCultive;
-
-            const imagePlante = document.createElement("img");
-            // image de la plante
-            plante.images.forEach(function (url) {
-                imagePlante.src = "/" + url;
-            });
-
-
-            sectionPlante.appendChild(planteElement);
-
-            planteElement.appendChild(imagePlante);
-            planteElement.appendChild(nomPlante);
-
-
-        });
 
 
     }).catch(error => {
@@ -66,15 +40,18 @@ form.addEventListener('change', function (event) {
 
 
 // Axiox pour ajouter au liste de souhait
-var boutons = document.querySelectorAll('.add_wish_list');
+let boutons = document.querySelectorAll('.favorite-button');
 
 // Parcourez la liste des boutons et ajoutez un écouteur d'événements à chacun
 boutons.forEach(function (bouton) {
     bouton.addEventListener('click', function () {
-        // Code à exécuter lorsque le bouton est cliqué
-        console.log("Bouton cliqué !");
+
 
         event.preventDefault();
+        let fovorits = document.getElementById("favorite_list");
+        fovorits.innerText = +fovorits.innerText + 1;
+
+        console.log(document.getElementById("favorite_list").innerText)
         const planteId = event.target.getAttribute('data-id');
 
         // Envoyez une requête Axios pour ajouter la plante à la liste de souhaits
@@ -87,3 +64,91 @@ boutons.forEach(function (bouton) {
 
     });
 });
+
+
+
+
+
+
+/*Axios pour afficher les plantes favories*/
+
+
+let bouton_favorits = document.getElementById('favorite_list_button');
+bouton_favorits.addEventListener('click', function (event) {
+    
+   
+
+ 
+
+    event.preventDefault();
+    // obtenir le div pour afficher les résultats
+
+    axios({
+        // on prend la route generee avec path du data-route du form
+        url: bouton_favorits.dataset.route,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        data: new FormData()
+    }).then(function (response) {
+        // parcourir l'array d'objets reçu (car le JSON a été déjà parsé par AXIOS)
+
+        if (response.status === 404) {
+            // L'utilisateur n'est pas connecté, affichez un message d'erreur ou redirigez-le vers la page de connexion
+            console.log('Erreur : L\'utilisateur n\'est pas connecté');}
+        let arrayPlantes = response.data;
+
+        genererPlante(arrayPlantes);
+
+
+    }).catch(error => {
+        console.error(error);
+    });
+});
+
+
+
+
+
+
+
+/*fonction pour générer les plantes sur la page*/
+
+function genererPlante(arrayPlantes) {
+
+    console.log("je suis ici");
+
+    let sectionPlante = document.querySelector(".fiches");
+
+    // parcourir l'array d'objets reçu (car le JSON a été déjà parsé par AXIOS)
+
+    sectionPlante.innerHTML = "";
+    arrayPlantes.forEach(function (plante) { // manipuler le DOM. Ex: vider un div et le remplir avec les résultats
+        console.log(plante);
+        const planteElement = document.createElement("article");
+
+
+
+        const imagePlante = document.createElement("img");
+        // image de la plante
+        plante.images.forEach(function (url) {
+            imagePlante.src = "/" + url;
+        });
+        // nom de la plante
+        const nomPlante = document.createElement("P");
+        nomPlante.innerText = plante.nom;
+
+        sectionPlante.appendChild(planteElement);
+
+       
+        planteElement.appendChild(nomPlante);
+        planteElement.appendChild(imagePlante);
+
+
+    });
+
+}
+
+
+
