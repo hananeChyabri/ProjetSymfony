@@ -108,7 +108,7 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js" integrity="sha512-emSwuKiMyYedRwflbZB2ghzX8Cw8fmNVgZ6yQNNXXagFzFOaQmbvQ1vmDkddHjm5AITcBIZfC7k4ShQSjgPAmQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 			<script>
 
-				// Axiox pour filtrer les plantes
+// Axios pour filtrer les plantes
 // on obtient le formulaire pour
 const form = document.getElementById('filtre-form-plante');
 
@@ -118,12 +118,12 @@ event.preventDefault();
 // obtenir le div pour afficher les résultats
 
 axios({
-url: '{{ path ("maPlante") }}',
-method: 'POST',
-headers: {
-'Content-Type': 'multipart/form-data'
-},
-data: new FormData(document.getElementById("filtre-form-plante"))
+	url: '{{ path ("maPlante") }}',
+	method: 'POST',
+	headers: {
+	'Content-Type': 'multipart/form-data'
+	},
+	data: new FormData(document.getElementById("filtre-form-plante"))
 }).then(function (response) {
 
 
@@ -168,31 +168,26 @@ console.error(error);
 });
 
 
-// Axiox pour ajouter au liste de souhait
-
+// Axios pour ajouter au liste de souhait
 
 
 var boutons = document.querySelectorAll('.add_wish_list');
 
 // Parcourez la liste des boutons et ajoutez un écouteur d'événements à chacun
-boutons.forEach(function(bouton) {
-  bouton.addEventListener('click', function() {
-    // Code à exécuter lorsque le bouton est cliqué
-    console.log("Bouton cliqué !");
+boutons.forEach(function (bouton) {
+bouton.addEventListener('click', function () { // Code à exécuter lorsque le bouton est cliqué
+console.log("Bouton cliqué !");
 
 event.preventDefault();
 const planteId = event.target.getAttribute('data-id');
 
 
-
-
-
 // Envoyez une requête Axios pour ajouter la plante à la liste de souhaits
- axios.post (`/plante/listSouhait/${planteId}`).then(function (response) { // Gérez la réponse du serveur (par exemple, actualisez l'interface utilisateur)
+axios.post (`/plante/listSouhait/${planteId}`).then(function (response) { // Gérez la réponse du serveur (par exemple, actualisez l'interface utilisateur)
 console.log(response);
 }).catch(function (error) {
 console.error('Une erreur s\'est produite lors de l\'ajout à la liste de souhaits', error);
-}); 
+});
 
 
 });
