@@ -166,3 +166,77 @@ body {
     }
 }
 
+
+/*--------------------------------------------------------------
+# About Us
+--------------------------------------------------------------*/
+.about .content h3 {
+    font-weight: 700;
+    font-size: 28px;
+  }
+  
+  .about .content ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .about .content ul li {
+    padding-bottom: 10px;
+  }
+  
+  .about .content ul i {
+    font-size: 20px;
+    padding-right: 4px;
+    color: #5cb874;
+  }
+  
+  .about .content p:last-child {
+    margin-bottom: 0;
+  }
+
+  /*--------------------------------------------------------------
+# Why Us
+--------------------------------------------------------------*/
+.why-us {
+    padding: 0;
+  }
+  
+  .why-us .row {
+    overflow: hidden;
+  }
+  
+  .why-us .content-item {
+    padding: 40px;
+    border-left: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    margin: -1px;
+  }
+  
+  .why-us .content-item span {
+    display: block;
+    font-size: 24px;
+    font-weight: 400;
+    color: #6ec083;
+  }
+  
+  .why-us .content-item h4 {
+    font-size: 26px;
+    font-weight: 300;
+    padding: 0;
+    margin: 20px 0;
+  }
+  
+  .why-us .content-item p {
+    color: #aaaaaa;
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .why-us .content-item {
+      padding: 40px 0;
+    }
+  }
+  
+

@@ -89,14 +89,13 @@
 					{% for image in plante.images %}
 
 						{# <img src="{{ asset('images/plante1.jpg') }}" alt="Description de l'image"> #}
-						<img src="{{ asset(image.url) }}" alt="Description de l'image">
+						<a href="{{ path('detaillePlante', {'id': plante.id}) }}" class="detaillePlante" data-id="{{ plante.id }}" data-route="/plante/detaille/"><img src="{{ asset(image.url) }}" alt="Description de l'image"></a>
 					{% endfor %}
 					<h2>{{ plante.nom }}<h2>
 							{# <button class="add_wish_list" data-id="{{ plante.id }}">like</button> #}
 
-							<button class="favorite-button" data-id="{{ plante.id }}">
+							<button class="favorite-button" data-route="/plante/listSouhait/" data-id="{{ plante.id }}">
 								<i class="fas fa-heart"></i>
-								j'aime
 							</button>
 
 						</article>

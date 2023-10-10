@@ -39,24 +39,31 @@ form.addEventListener('change', function (event) {
 });
 
 
-// Axiox pour ajouter au liste de souhait
+// Axios pour ajouter au liste de souhait
 let boutons = document.querySelectorAll('.favorite-button');
 
 // Parcourez la liste des boutons et ajoutez un écouteur d'événements à chacun
 boutons.forEach(function (bouton) {
-    bouton.addEventListener('click', function () {
+    bouton.addEventListener('click', function (event) {
 
 
         event.preventDefault();
         let fovorits = document.getElementById("favorite_list");
         fovorits.innerText = +fovorits.innerText + 1;
-
-        console.log(document.getElementById("favorite_list").innerText)
-        const planteId = event.target.getAttribute('data-id');
-
-        // Envoyez une requête Axios pour ajouter la plante à la liste de souhaits
-        axios.post(`/plante/listSouhait/${planteId}`).then(function (response) { // Gérez la réponse du serveur (par exemple, actualisez l'interface utilisateur)
-            console.log(response);
+        const planteId = bouton.dataset.id;
+console.log(planteId);
+        // on prend la route generee avec path du data-route du form
+        let formLike = new FormData();
+        formLike.append("id",planteId);
+        axios.post( bouton.dataset.route,formLike,{
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+    }).then(function (response) { // Gérez la réponse du serveur (par exemple, actualisez l'interface utilisateur)
+        if (response.data.success) {
+   
+            console.log('Like réussi');
+        }
         }).catch(function (error) {
             console.error('Une erreur s\'est produite lors de l\'ajout à la liste de souhaits', error);
         });
@@ -75,11 +82,6 @@ boutons.forEach(function (bouton) {
 
 let bouton_favorits = document.getElementById('favorite_list_button');
 bouton_favorits.addEventListener('click', function (event) {
-    
-   
-
- 
-
     event.preventDefault();
     // obtenir le div pour afficher les résultats
 
@@ -92,14 +94,17 @@ bouton_favorits.addEventListener('click', function (event) {
         },
         data: new FormData()
     }).then(function (response) {
-        // parcourir l'array d'objets reçu (car le JSON a été déjà parsé par AXIOS)
+      
 
         if (response.status === 404) {
             // L'utilisateur n'est pas connecté, affichez un message d'erreur ou redirigez-le vers la page de connexion
-            console.log('Erreur : L\'utilisateur n\'est pas connecté');}
+            console.log('Erreur : L\'utilisateur n\'est pas connecté');
+        }
+        else
+        {
         let arrayPlantes = response.data;
 
-        genererPlante(arrayPlantes);
+        genererPlante(arrayPlantes);}
 
 
     }).catch(error => {
@@ -113,16 +118,14 @@ bouton_favorits.addEventListener('click', function (event) {
 
 
 
+
+
 /*fonction pour générer les plantes sur la page*/
 
 function genererPlante(arrayPlantes) {
-
-    console.log("je suis ici");
-
     let sectionPlante = document.querySelector(".fiches");
 
     // parcourir l'array d'objets reçu (car le JSON a été déjà parsé par AXIOS)
-
     sectionPlante.innerHTML = "";
     arrayPlantes.forEach(function (plante) { // manipuler le DOM. Ex: vider un div et le remplir avec les résultats
         console.log(plante);
@@ -141,7 +144,7 @@ function genererPlante(arrayPlantes) {
 
         sectionPlante.appendChild(planteElement);
 
-       
+
         planteElement.appendChild(nomPlante);
         planteElement.appendChild(imagePlante);
 

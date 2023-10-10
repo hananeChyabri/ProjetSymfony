@@ -24,7 +24,7 @@ Encore
 
     .addEntry('findPlante', './assets/findPlante.js')
 
-    .addEntry('formLogin', './assets/login.js')
+    .addEntry('formLogin', './assets/formlogin.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

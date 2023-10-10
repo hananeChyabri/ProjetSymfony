@@ -15,7 +15,7 @@ class ImageFixtures extends Fixture implements DependentFixtureInterface
         $repPlantes = $manager->getRepository(Plante::class);
         $Plantes = $repPlantes->findAll();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i <= 10; $i++) {
             $image = new Image();
 
             $image->setUrl("images/plante" . $i + 1 . ".jpg");

@@ -67,9 +67,6 @@ class TrouverPlanteController extends AbstractController
     $res = $query->getResult();
     $vars = ['listePlantes' => $res,'form' => $formulaireFiltrePlante];
         }
-
-
-        
         return $this->render('plante/trouver_une_plante.html.twig', $vars);
     }
 

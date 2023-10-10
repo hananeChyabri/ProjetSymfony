@@ -40,7 +40,7 @@ main {
     margin: 8px;
     padding: 8px;
     min-width: 300px;
-    min-height: 400px;
+    height: 1400px;
 }
 
 .filtres h3 {
@@ -57,7 +57,7 @@ main {
 }
 
 .fiches article {
-    border: 1px solid black;
+    border: 1px solid #8ea28b;
     padding: 4px;
 }
 
@@ -80,6 +80,7 @@ main {
 
 
 .favorite-button {
+    float: right;
     background-color: #40573e;
     color: white;
     border: none;
