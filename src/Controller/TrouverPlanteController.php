@@ -36,15 +36,17 @@ class TrouverPlanteController extends AbstractController
             $plantes = [];
             foreach ($resultats as $plante) {
                 $arrPlante = [];
-                
+                $arrPlante['id'] = $plante->getId();
                 $arrPlante['nom'] = $plante->getNom();
                 $arrPlante['exposition'] = $plante->getExposition();
                 $arrPlante['besoinEau'] = $plante->getBesoinEau();
                 $arrPlante['lieuCultive'] = $plante->getLieuCultive();
+                $arrPlante['description'] = $plante->getDescription();
+                $arrPlante['niveauSoin'] = $plante->getNiveauSoin();
                 $arrPlante['images'] = [];
                 foreach ($plante->getImages() as $image) {
                     // rajouter le nom de l'auteur à l'array
-                    $arrPlante['images'][] = $image->getUrl();
+                $arrPlante['images'][] = $image->getUrl();
                 }
           
                 // rajouter le livre ayant l'array d'auteurs incrusté
@@ -67,7 +69,7 @@ class TrouverPlanteController extends AbstractController
     $res = $query->getResult();
     $vars = ['listePlantes' => $res,'form' => $formulaireFiltrePlante];
         }
-        return $this->render('plante/trouver_une_plante.html.twig', $vars);
+        return $this->render('plante/trouver_une_plante2.html.twig', $vars);
     }
 
     

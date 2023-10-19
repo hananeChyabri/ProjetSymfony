@@ -10,6 +10,7 @@ const form = document.getElementById('filtre-form-plante');
 
 // on detectera tous les inputs du form, peu importe quel fitre on change
 form.addEventListener('change', function (event) {
+
     event.preventDefault();
     // obtenir le div pour afficher les résultats
 
@@ -39,6 +40,195 @@ form.addEventListener('change', function (event) {
 });
 
 
+
+/*fonction pour générer les plantes sur la page*/
+
+function genererPlante(arrayPlantes) {
+  
+
+    var container = document.querySelector('.plante'); // le conteneur de plantes
+    container.innerHTML = "";
+  
+    // Parcourir la liste de plantes
+    arrayPlantes.forEach(function (plante) {
+        console.log("le id "+plante.id);
+        var colDiv = document.createElement('div');
+        colDiv.className = 'col-lg-3 col-md-6 pb-1';
+
+        var containerPhotoDiv = document.createElement('div');
+        containerPhotoDiv.className = 'containerPhoto cat-item d-flex flex-column border mb-4';
+
+        var cardcontainerDiv = document.createElement('div');
+        cardcontainerDiv.className = 'cardcontainer';
+
+        var photoDiv = document.createElement('div');
+        photoDiv.className = 'photo';
+
+        // Parcourir les images de la plante
+      
+            plante.images.forEach(function (url) {
+                console.log(url);
+            var a = document.createElement('a');
+            a.href = '/plante/detaille/'+plante.id;
+            a.className = 'detaillePlante cat-img position-relative overflow-hidden mb-3';
+        
+            var img = document.createElement('img');
+            console.log(url);
+            img.src = "/" +url;
+
+            a.appendChild(img);
+            photoDiv.appendChild(a);
+        });
+
+        var photosDiv = document.createElement('div');
+        photosDiv.className = 'photos';
+        photosDiv.textContent = plante.nom;
+
+        var contentDiv = document.createElement('div');
+        contentDiv.className = 'content';
+
+        var txt4Exposition = document.createElement('p');
+        txt4Exposition.className = 'txt4';
+        txt4Exposition.textContent = 'exposition: ' + plante.exposition;
+
+        var txt4BesoinEau = document.createElement('p');
+        txt4BesoinEau.className = 'txt4';
+        txt4BesoinEau.textContent = 'besoin Eau: ' + plante.besoinEau;
+
+        var txt4NiveauSoin = document.createElement('p');
+        txt4NiveauSoin.className = 'txt4';
+        txt4NiveauSoin.textContent = 'niveau Soin: ' + plante.niveauSoin;
+
+        var footerDiv = document.createElement('div');
+        footerDiv.className = 'footer';
+
+        var detaillePlanteLink = document.createElement('a');
+        detaillePlanteLink.href = '/plante/detaille/' + plante.id;
+        detaillePlanteLink.className = 'detaillePlante waves-effect waves-light btn';
+        detaillePlanteLink.textContent = 'Read More';
+
+        var favoriteButtonLink = document.createElement('a');
+        favoriteButtonLink.className = 'favorite-button';
+        favoriteButtonLink.setAttribute('data-route', '/plante/listSouhait/');
+        favoriteButtonLink.setAttribute('data-id', plante.id);
+        favoriteButtonLink.id = 'heart';
+
+        var likeSpan = document.createElement('span');
+        likeSpan.className = 'like';
+
+        var gratipayIcon = document.createElement('i');
+        gratipayIcon.className = 'fab fa-gratipay';
+
+        likeSpan.appendChild(gratipayIcon);
+        likeSpan.appendChild(document.createTextNode('Like'));
+        favoriteButtonLink.appendChild(likeSpan);
+
+        var txt3Paragraph = document.createElement('p');
+        txt3Paragraph.className = 'txt3';
+
+        var clockIcon = document.createElement('i');
+        clockIcon.className = 'far fa-clock';
+
+        var minutesAgo = document.createTextNode('10 Minutes Ago');
+        var commentsIcon = document.createElement('i');
+        commentsIcon.className = 'fas fa-comments';
+
+        var commentsSpan = document.createElement('span');
+        commentsSpan.className = 'comments';
+        commentsSpan.appendChild(commentsIcon);
+        commentsSpan.appendChild(document.createTextNode('45 Comments'));
+
+        txt3Paragraph.appendChild(clockIcon);
+        txt3Paragraph.appendChild(minutesAgo);
+        txt3Paragraph.appendChild(commentsSpan);
+
+        footerDiv.appendChild(detaillePlanteLink);
+        footerDiv.appendChild(favoriteButtonLink);
+
+        contentDiv.appendChild(txt4Exposition);
+        contentDiv.appendChild(txt4BesoinEau);
+        contentDiv.appendChild(txt4NiveauSoin);
+
+        cardcontainerDiv.appendChild(photoDiv);
+        cardcontainerDiv.appendChild(contentDiv);
+        cardcontainerDiv.appendChild(footerDiv);
+
+        containerPhotoDiv.appendChild(cardcontainerDiv);
+        photoDiv.appendChild(photosDiv);
+        //containerPhotoDiv.appendChild(photosDiv);
+
+        colDiv.appendChild(containerPhotoDiv);
+
+        // Ajoutez le nouvel élément à votre conteneur
+        container.appendChild(colDiv);
+    });
+}
+
+/**fonction generer plante version 1 */
+function genererPlante2(arrayPlantes) {
+
+    let sectionPlante = document.querySelector(".plante");
+
+    // parcourir l'array d'objets reçu (car le JSON a été déjà parsé par AXIOS)
+    sectionPlante.innerHTML = "";
+    arrayPlantes.forEach(function (plante) {
+      
+      
+        const colDiv = document.createElement("div");
+        colDiv.classList.add("col-lg-4", "col-md-6", "pb-1");
+
+        // Création de l'élément div cat-item
+        const catItemDiv = document.createElement("div");
+        catItemDiv.classList.add("cat-item", "d-flex", "flex-column", "border", "mb-4");
+        catItemDiv.style.padding = "30px";
+
+        // Création du paragraphe avec le nom de la plante
+        const nameParagraph = document.createElement("p");
+        nameParagraph.classList.add("text-right");
+        nameParagraph.textContent = plante.nom; // Remplacez par le nom de la plante réel
+
+        // Boucle pour les images de la plante
+
+        plante.images.forEach(function (url) {
+            console.log(url);
+
+            const aTag = document.createElement("a");
+            aTag.href = "/plante/detaille/"; // Remplacez par le lien réel
+            aTag.classList.add("detaillePlante", "cat-img", "position-relative", "overflow-hidden", "mb-3");
+            aTag.setAttribute("id", plante.id);
+            const img = document.createElement("img");
+            img.classList.add("img-fluid");
+            img.src = "/" + url;
+            img.alt = "Description de l'image";
+
+            aTag.appendChild(img);
+            catItemDiv.appendChild(aTag);
+        });
+
+        // Création du bouton "favori" (favorite-button)
+        const favoriteButton = document.createElement("button");
+        favoriteButton.classList.add("favorite-button");
+        favoriteButton.setAttribute("data-route", "/plante/listSouhait/");
+        favoriteButton.setAttribute("data-id", plante.id);
+
+        const heartIcon = document.createElement("i");
+        heartIcon.classList.add("fas", "fa-heart");
+
+        favoriteButton.appendChild(heartIcon);
+
+        // Ajout des éléments au DOM
+        catItemDiv.appendChild(nameParagraph);
+        catItemDiv.appendChild(favoriteButton);
+        colDiv.appendChild(catItemDiv);
+
+        // Ajout du colDiv au conteneur parent (remplacez "#container" par le sélecteur réel de votre conteneur parent)
+        sectionPlante.appendChild(colDiv);
+
+
+    });
+
+}
+
 // Axios pour ajouter au liste de souhait
 let boutons = document.querySelectorAll('.favorite-button');
 
@@ -47,25 +237,44 @@ boutons.forEach(function (bouton) {
     bouton.addEventListener('click', function (event) {
 
 
+
+
         event.preventDefault();
         let fovorits = document.getElementById("favorite_list");
-        fovorits.innerText = +fovorits.innerText + 1;
+
         const planteId = bouton.dataset.id;
-console.log(planteId);
+        console.log(planteId);
         // on prend la route generee avec path du data-route du form
         let formLike = new FormData();
-        formLike.append("id",planteId);
-        axios.post( bouton.dataset.route,formLike,{
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        },
-    }).then(function (response) { // Gérez la réponse du serveur (par exemple, actualisez l'interface utilisateur)
-        if (response.data.success) {
-   
-            console.log('Like réussi');
-        }
+        formLike.append("id", planteId);
+        axios.post(bouton.dataset.route, formLike, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+        }).then(function (response) { // Gérez la réponse du serveur (par exemple, actualisez l'interface utilisateur)
+
+            if (response.data.success) {
+                fovorits.innerText = +fovorits.innerText + 1;
+                var heartElement = event.target.parentElement.querySelector('.like .fab.fa-gratipay');
+                heartElement.style.color = "#E74C3C";
+                console.log('Like réussi');
+            }
         }).catch(function (error) {
-            console.error('Une erreur s\'est produite lors de l\'ajout à la liste de souhaits', error);
+
+            if (error.response) {
+                if (error.response.status === 404) {
+                    alert(error.response.data.message);
+                } else if (error.response.status === 400) {
+                    console.log("plante existe deja"); // La requête elle-même n'a pas eu de réponse
+                } else {
+                    console.log('Erreur', error.message);
+                }
+            }
+
+
+
+
+            // console.error('Une erreur s\'est produite lors de l\'ajout à la liste de souhaits', error);
         });
 
 
@@ -94,64 +303,23 @@ bouton_favorits.addEventListener('click', function (event) {
         },
         data: new FormData()
     }).then(function (response) {
-      
+
 
         if (response.status === 404) {
             // L'utilisateur n'est pas connecté, affichez un message d'erreur ou redirigez-le vers la page de connexion
             console.log('Erreur : L\'utilisateur n\'est pas connecté');
         }
-        else
-        {
-        let arrayPlantes = response.data;
+        else {
+            let arrayPlantes = response.data;
 
-        genererPlante(arrayPlantes);}
+            genererPlante(arrayPlantes);
+        }
 
 
     }).catch(error => {
         console.error(error);
     });
 });
-
-
-
-
-
-
-
-
-
-/*fonction pour générer les plantes sur la page*/
-
-function genererPlante(arrayPlantes) {
-    let sectionPlante = document.querySelector(".fiches");
-
-    // parcourir l'array d'objets reçu (car le JSON a été déjà parsé par AXIOS)
-    sectionPlante.innerHTML = "";
-    arrayPlantes.forEach(function (plante) { // manipuler le DOM. Ex: vider un div et le remplir avec les résultats
-        console.log(plante);
-        const planteElement = document.createElement("article");
-
-
-
-        const imagePlante = document.createElement("img");
-        // image de la plante
-        plante.images.forEach(function (url) {
-            imagePlante.src = "/" + url;
-        });
-        // nom de la plante
-        const nomPlante = document.createElement("P");
-        nomPlante.innerText = plante.nom;
-
-        sectionPlante.appendChild(planteElement);
-
-
-        planteElement.appendChild(nomPlante);
-        planteElement.appendChild(imagePlante);
-
-
-    });
-
-}
 
 
 

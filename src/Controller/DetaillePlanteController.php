@@ -17,10 +17,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class DetaillePlanteController extends AbstractController
 {
 
-    #[Route('/plante/detaille/', name: 'detaillePlante')]
+    #[Route('/plante/detaille/{id}', name: 'detaillePlante')]
     public function AfficherDetaillePlante(Request $req, PlanteRepository $rep)
 
     {
+     
 
         $id = $req->get('id');
       

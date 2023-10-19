@@ -33,8 +33,9 @@ class AddWishListController extends AbstractController
 
 
         if (!$user) {
-            return new JsonResponse(['message' => 'Connectez vous pour ajouter au liste de favorits'], 404);
+            return new JsonResponse(['message' => 'Connexion requise ! Connectez-vous pour ajouter une plante à la liste des favoris.'], 404);
         } else {
+            
             // //obtenir plante dans la base de donne avec find 
             $id = $req->get('id');
 
@@ -43,6 +44,13 @@ class AddWishListController extends AbstractController
 
             $plante = $rep->find($id);
 
+            $planteAjoutee = $user->getPlantes()->contains($plante);
+            if($planteAjoutee)
+            {
+                return new JsonResponse(['message' => 'La plante existe deja dans la liste de favorits'], 400);
+            }
+
+            else{
             //Ajouter la Plante au User
             $user->addPlante($plante);
 
@@ -52,7 +60,7 @@ class AddWishListController extends AbstractController
             $entityManager->flush();
             $success = true; // Mettez ici votre logique pour déterminer si le "like" a réussi ou échoué.
 
-            return new JsonResponse(['success' => $success]);
+            return new JsonResponse(['success' => $success]);}
         }
     }
 

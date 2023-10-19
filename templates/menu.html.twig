@@ -1,10 +1,49 @@
+<!-- Topbar Start -->
+	<div class="container-fluid">
+
+		<div class="row align-items-center py-3 px-xl-5">
+			<div class="col-lg-3 d-none d-lg-block">
+				<a class="text-decoration-none" href="{{ path('maPlante') }}">
+					<h1 class="m-0 display-5 font-weight-semi-bold">
+						<span class="text-primary font-weight-bold border px-3 mr-1">E</span>plante</h1>
+				</a>
+			</div>
+			<div class="col-lg-6 col-6 text-left">
+				<form action="">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search for products">
+						<div class="input-group-append">
+							<span class="input-group-text bg-transparent text-primary">
+								<i class="fa fa-search"></i>
+							</span>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-lg-3 col-6 text-right">
+		
+				<a id="favorite_list_button" data-route="/plante/favorit_plantes/" href="" class="btn border">
+					<i class="fas fa-heart text-primary"></i>
+					<span id="favorite_list" class="badge">0</span>
+				</a>
+				<a href="" class="btn border">
+					<i class="fas fa-shopping-cart text-primary"></i>
+					<span class="badge">0</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- Topbar End -->
+
+
+
+
+
 <!-- ======= Header ======= -->
 <header id="header" class="d-flex align-items-center">
 	<div class="container d-flex align-items-center">
 
-		<h1 class="logo me-auto">
-			<a class="nav-link scrollto" href="{{ path('maPlante') }}">Plantes</a>
-		</h1>
+		
 		<!-- Uncomment below if you prefer to use an image logo -->
 		<!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -34,17 +73,13 @@
 					<li>
 					<a href="{{ path('app_logout') }}">Logout</a>
 				</li>
-			</div>
+			</ul>
 
 
 		</li>
 
 
-		<li>
 
-			<a id="favorite_list_button" data-route="/plante/favorit_plantes/" href="#"><img src="/images/icon/heart.png" alt=""><span id="favorite_list">1</span>
-			</a>
-		</li>
 
 
 	</ul>
