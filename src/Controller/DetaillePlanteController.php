@@ -24,16 +24,7 @@ class DetaillePlanteController extends AbstractController
      
 
         $id = $req->get('id');
-      
-
-     
-
         $plante = $rep->find($id);
-
-
-    
-      
-
 
         $vars = ['Plante' => $plante];
          return $this->render('plante/afficher_detaille_plante.html.twig', $vars);

@@ -85,7 +85,7 @@ class Plante
     private Collection $images;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'plantes')]
-    private Collection $relation;
+    private Collection $relation; // array de users
 
 
 

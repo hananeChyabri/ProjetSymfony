@@ -116,8 +116,13 @@ function genererPlante(arrayPlantes) {
         var likeSpan = document.createElement('span');
         likeSpan.className = 'like';
 
+        // afficher en fonction de si la plante a ete like
         var gratipayIcon = document.createElement('i');
         gratipayIcon.className = 'fab fa-gratipay';
+        if(plante.like )
+        {
+            gratipayIcon.style.color = "#E74C3C";
+        }
 
         likeSpan.appendChild(gratipayIcon);
         likeSpan.appendChild(document.createTextNode('Like'));
@@ -236,9 +241,6 @@ let boutons = document.querySelectorAll('.favorite-button');
 boutons.forEach(function (bouton) {
     bouton.addEventListener('click', function (event) {
 
-
-
-
         event.preventDefault();
         let fovorits = document.getElementById("favorite_list");
 
@@ -247,6 +249,8 @@ boutons.forEach(function (bouton) {
         // on prend la route generee avec path du data-route du form
         let formLike = new FormData();
         formLike.append("id", planteId);
+
+        
         axios.post(bouton.dataset.route, formLike, {
             headers: {
                 'Content-Type': 'multipart/form-data'

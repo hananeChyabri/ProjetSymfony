@@ -27,6 +27,8 @@ class TrouverPlanteController extends AbstractController
 
         $formulaireFiltrePlante->handleRequest($req);
 
+        $user = $this->getUser();
+
         if ($formulaireFiltrePlante->isSubmitted() && $formulaireFiltrePlante->isValid()) {
 
             $rep = $doctrine->getRepository(Plante::class);
@@ -48,15 +50,23 @@ class TrouverPlanteController extends AbstractController
                     // rajouter le nom de l'auteur à l'array
                     $arrPlante['images'][] = $image->getUrl();
                 }
+                // voir si la plante est dans la liste des Users
+                if ($user){
+                    $arrPlante['like'] = $user->getPlantes()->contains($plante) ? true : false;
+                }
+                else {
+                    $arrPlante['like'] = false;
+                }
 
-                // rajouter le livre ayant l'array d'auteurs incrusté
+
                 $plantes[] = $arrPlante;
+
             }
 
 
 
 
-            $response = $serializer->serialize($plantes, 'json', [AbstractNormalizer::IGNORED_ATTRIBUTES => ['images']]);
+            $response = $serializer->serialize($plantes, 'json');
 
 
             return new Response($response);
