@@ -28,39 +28,42 @@ class AddWishListController extends AbstractController
     {
 
         //Obtenir le user Actuel
-
         $user = $this->getUser();
-
 
         if (!$user) {
             return new JsonResponse(['message' => 'Connexion requise ! Connectez-vous pour ajouter une plante à la liste des favoris.'], 404);
         } else {
-            
+
+          
+
             // //obtenir plante dans la base de donne avec find 
             $id = $req->get('id');
-
             $entityManager = $doctrine->getManager();
             $rep = $entityManager->getRepository(Plante::class);
 
             $plante = $rep->find($id);
 
             $planteAjoutee = $user->getPlantes()->contains($plante);
-            if($planteAjoutee)
-            {
-                return new JsonResponse(['message' => 'La plante existe deja dans la liste de favorits'], 400);
+            // dd($planteAjoutee);
+
+            // indique si dans ce click on va rajouter une plante ou pas
+            $rajoute = null;
+
+            if ($planteAjoutee) {
+                // Supprimer la Plante au User 
+                $user->removePlante($plante);
+                $rajoute = false;
+            } else {
+                //Ajouter la Plante au User
+                $user->addPlante($plante);
+                $rajoute = true;
+
+                // $entityManager->persist($user);
+
+                // Exécution des opérations en base de données
             }
-
-            else{
-            //Ajouter la Plante au User
-            $user->addPlante($plante);
-
-            $entityManager->persist($user);
-
-            // Exécution des opérations en base de données
             $entityManager->flush();
-            $success = true; // Mettez ici votre logique pour déterminer si le "like" a réussi ou échoué.
-
-            return new JsonResponse(['success' => $success]);}
+            return new JsonResponse(['rajoute' => $rajoute], 200);
         }
     }
 
@@ -88,7 +91,7 @@ class AddWishListController extends AbstractController
             $plantes = [];
             foreach ($favorites as $plante) {
                 $arrPlante = [];
-
+                $arrPlante['id'] = $plante->getId();
                 $arrPlante['nom'] = $plante->getNom();
                 $arrPlante['exposition'] = $plante->getExposition();
                 $arrPlante['besoinEau'] = $plante->getBesoinEau();
@@ -98,6 +101,9 @@ class AddWishListController extends AbstractController
                     // rajouter le nom de l'auteur à l'array
                     $arrPlante['images'][] = $image->getUrl();
                 }
+                $arrPlante['like'] = false;
+                if ($user)
+                $arrPlante['like'] = $user->getPlantes()->contains($plante) ? true : false;
 
                 // rajouter le livre ayant l'array d'auteurs incrusté
                 $plantes[] = $arrPlante;
@@ -107,7 +113,4 @@ class AddWishListController extends AbstractController
             return new JsonResponse($plantes);
         }
     }
-
-
-   
 }

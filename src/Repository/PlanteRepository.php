@@ -74,8 +74,7 @@ class PlanteRepository extends ServiceEntityRepository
         // //  $query->setParameter("lieuCultive", $filtres['lieuCultive']);
 
 
-        $dql = 'SELECT plante, u FROM App\Entity\Plante plante 
-                LEFT JOIN plante.relation u';
+        $dql = 'SELECT plante FROM App\Entity\Plante plante';
 
         $exposition = isset($filtres['exposition']) ? $filtres['exposition'] : null;
         $besoinEau = isset($filtres['besoinEau']) ? $filtres['besoinEau'] : null;

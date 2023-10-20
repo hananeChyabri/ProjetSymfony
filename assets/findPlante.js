@@ -30,7 +30,7 @@ form.addEventListener('change', function (event) {
         // parcourir l'array d'objets reçu (car le JSON a été déjà parsé par AXIOS)
         let arrayPlantes = response.data;
 
-        genererPlante(arrayPlantes);
+        genererPlantes(arrayPlantes);
 
 
 
@@ -43,15 +43,15 @@ form.addEventListener('change', function (event) {
 
 /*fonction pour générer les plantes sur la page*/
 
-function genererPlante(arrayPlantes) {
-  
+function genererPlantes(arrayPlantes) {
+
 
     var container = document.querySelector('.plante'); // le conteneur de plantes
     container.innerHTML = "";
-  
+
     // Parcourir la liste de plantes
     arrayPlantes.forEach(function (plante) {
-        console.log("le id "+plante.id);
+      
         var colDiv = document.createElement('div');
         colDiv.className = 'col-lg-3 col-md-6 pb-1';
 
@@ -65,16 +65,16 @@ function genererPlante(arrayPlantes) {
         photoDiv.className = 'photo';
 
         // Parcourir les images de la plante
-      
-            plante.images.forEach(function (url) {
-                console.log(url);
-            var a = document.createElement('a');
-            a.href = '/plante/detaille/'+plante.id;
-            a.className = 'detaillePlante cat-img position-relative overflow-hidden mb-3';
+
+        plante.images.forEach(function (url) {
         
+            var a = document.createElement('a');
+            a.href = '/plante/detaille/' + plante.id;
+            a.className = 'detaillePlante cat-img position-relative overflow-hidden mb-3';
+
             var img = document.createElement('img');
-            console.log(url);
-            img.src = "/" +url;
+      
+            img.src = "/" + url;
 
             a.appendChild(img);
             photoDiv.appendChild(a);
@@ -108,10 +108,13 @@ function genererPlante(arrayPlantes) {
         detaillePlanteLink.textContent = 'Read More';
 
         var favoriteButtonLink = document.createElement('a');
-        favoriteButtonLink.className = 'favorite-button';
+        favoriteButtonLink.className = 'favorite-button'
+
         favoriteButtonLink.setAttribute('data-route', '/plante/listSouhait/');
         favoriteButtonLink.setAttribute('data-id', plante.id);
         favoriteButtonLink.id = 'heart';
+
+        favoriteButtonLink.addEventListener("click", AjouterListFavoris);
 
         var likeSpan = document.createElement('span');
         likeSpan.className = 'like';
@@ -119,9 +122,9 @@ function genererPlante(arrayPlantes) {
         // afficher en fonction de si la plante a ete like
         var gratipayIcon = document.createElement('i');
         gratipayIcon.className = 'fab fa-gratipay';
-        if(plante.like )
-        {
-            gratipayIcon.style.color = "#E74C3C";
+        if (plante.like) {
+           
+            gratipayIcon.classList.add("fa-gratipay-like");
         }
 
         likeSpan.appendChild(gratipayIcon);
@@ -166,124 +169,68 @@ function genererPlante(arrayPlantes) {
 
         // Ajoutez le nouvel élément à votre conteneur
         container.appendChild(colDiv);
-    });
-}
-
-/**fonction generer plante version 1 */
-function genererPlante2(arrayPlantes) {
-
-    let sectionPlante = document.querySelector(".plante");
-
-    // parcourir l'array d'objets reçu (car le JSON a été déjà parsé par AXIOS)
-    sectionPlante.innerHTML = "";
-    arrayPlantes.forEach(function (plante) {
-      
-      
-        const colDiv = document.createElement("div");
-        colDiv.classList.add("col-lg-4", "col-md-6", "pb-1");
-
-        // Création de l'élément div cat-item
-        const catItemDiv = document.createElement("div");
-        catItemDiv.classList.add("cat-item", "d-flex", "flex-column", "border", "mb-4");
-        catItemDiv.style.padding = "30px";
-
-        // Création du paragraphe avec le nom de la plante
-        const nameParagraph = document.createElement("p");
-        nameParagraph.classList.add("text-right");
-        nameParagraph.textContent = plante.nom; // Remplacez par le nom de la plante réel
-
-        // Boucle pour les images de la plante
-
-        plante.images.forEach(function (url) {
-            console.log(url);
-
-            const aTag = document.createElement("a");
-            aTag.href = "/plante/detaille/"; // Remplacez par le lien réel
-            aTag.classList.add("detaillePlante", "cat-img", "position-relative", "overflow-hidden", "mb-3");
-            aTag.setAttribute("id", plante.id);
-            const img = document.createElement("img");
-            img.classList.add("img-fluid");
-            img.src = "/" + url;
-            img.alt = "Description de l'image";
-
-            aTag.appendChild(img);
-            catItemDiv.appendChild(aTag);
-        });
-
-        // Création du bouton "favori" (favorite-button)
-        const favoriteButton = document.createElement("button");
-        favoriteButton.classList.add("favorite-button");
-        favoriteButton.setAttribute("data-route", "/plante/listSouhait/");
-        favoriteButton.setAttribute("data-id", plante.id);
-
-        const heartIcon = document.createElement("i");
-        heartIcon.classList.add("fas", "fa-heart");
-
-        favoriteButton.appendChild(heartIcon);
-
-        // Ajout des éléments au DOM
-        catItemDiv.appendChild(nameParagraph);
-        catItemDiv.appendChild(favoriteButton);
-        colDiv.appendChild(catItemDiv);
-
-        // Ajout du colDiv au conteneur parent (remplacez "#container" par le sélecteur réel de votre conteneur parent)
-        sectionPlante.appendChild(colDiv);
-
 
     });
-
 }
 
 // Axios pour ajouter au liste de souhait
 let boutons = document.querySelectorAll('.favorite-button');
-
 // Parcourez la liste des boutons et ajoutez un écouteur d'événements à chacun
 boutons.forEach(function (bouton) {
-    bouton.addEventListener('click', function (event) {
-
+    bouton.addEventListener("click", AjouterListFavoris);});
+    function AjouterListFavoris(event) {
         event.preventDefault();
         let fovorits = document.getElementById("favorite_list");
 
-        const planteId = bouton.dataset.id;
-        console.log(planteId);
+        const planteId = event.target.parentElement.dataset.id;
+   
         // on prend la route generee avec path du data-route du form
         let formLike = new FormData();
         formLike.append("id", planteId);
 
-        
-        axios.post(bouton.dataset.route, formLike, {
+
+        axios.post(event.target.parentElement.dataset.route, formLike, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             },
         }).then(function (response) { // Gérez la réponse du serveur (par exemple, actualisez l'interface utilisateur)
 
-            if (response.data.success) {
+            // on rajoute la plante
+            if (response.data.rajoute) {
                 fovorits.innerText = +fovorits.innerText + 1;
                 var heartElement = event.target.parentElement.querySelector('.like .fab.fa-gratipay');
-                heartElement.style.color = "#E74C3C";
-                console.log('Like réussi');
+             
+                heartElement.classList.add("fa-gratipay-like");
+                console.log('rajoute');
             }
+            // on enleve la plante
+            else {
+                fovorits.innerText = +fovorits.innerText - 1;
+                var heartElement = event.target.parentElement.querySelector('.like .fab.fa-gratipay');
+                
+                heartElement.classList.remove("fa-gratipay-like");
+                heartElement.classList.remove("fa-gratipay-like");
+                console.log('enleve');
+
+            }
+
         }).catch(function (error) {
 
             if (error.response) {
                 if (error.response.status === 404) {
                     alert(error.response.data.message);
-                } else if (error.response.status === 400) {
-                    console.log("plante existe deja"); // La requête elle-même n'a pas eu de réponse
-                } else {
-                    console.log('Erreur', error.message);
                 }
             }
 
-
-
-
-            // console.error('Une erreur s\'est produite lors de l\'ajout à la liste de souhaits', error);
         });
 
 
-    });
-});
+
+
+    }
+
+
+
 
 
 
@@ -316,7 +263,7 @@ bouton_favorits.addEventListener('click', function (event) {
         else {
             let arrayPlantes = response.data;
 
-            genererPlante(arrayPlantes);
+            genererPlantes(arrayPlantes);
         }
 
 
@@ -324,6 +271,39 @@ bouton_favorits.addEventListener('click', function (event) {
         console.error(error);
     });
 });
+
+
+/* axiox pour la recherche */
+
+
+
+let bouton_recherche = document.querySelector('fa-search');
+bouton_recherche.addEventListener('click', function (event) {
+    event.preventDefault();
+    
+
+    axios({
+        // on prend la route generee avec path du data-route du form
+        url: bouton_favorits.dataset.route,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        data: new FormData()
+    }).then(function (response) {
+
+
+        let arrayPlantes = response.data;
+
+            genererPlantes(arrayPlantes);
+    
+
+
+    }).catch(error => {
+        console.error(error);
+    });
+});
+
 
 
 

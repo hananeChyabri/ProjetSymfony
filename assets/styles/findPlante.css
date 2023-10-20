@@ -96,6 +96,10 @@
     margin-right: 10px;
     transition: 0.5s;
   }
+  /* like actif */
+  .fa-gratipay-like{
+    color: #E74C3C;
+  }
   .fa-gratipay:hover{
     color: #E74C3C;
   }
@@ -112,3 +116,4 @@
   .fa-clock, .fa-comments{
     margin-right: 7px;
   }
+

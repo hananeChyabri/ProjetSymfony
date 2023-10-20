@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Controller;
-
-use doctrine;
 use App\Entity\Plante;
 use App\Form\FiltrePlanteType;
 use Doctrine\Persistence\ManagerRegistry;
@@ -10,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TrouverPlanteController extends AbstractController
@@ -51,24 +48,16 @@ class TrouverPlanteController extends AbstractController
                     $arrPlante['images'][] = $image->getUrl();
                 }
                 // voir si la plante est dans la liste des Users
-                if ($user){
-                    $arrPlante['like'] = $user->getPlantes()->contains($plante) ? true : false;
-                }
-                else {
-                    $arrPlante['like'] = false;
-                }
+                $arrPlante['like'] = false;
+                if ($user)
+                $arrPlante['like'] = $user->getPlantes()->contains($plante) ? true : false;
+                
 
 
                 $plantes[] = $arrPlante;
 
             }
-
-
-
-
             $response = $serializer->serialize($plantes, 'json');
-
-
             return new Response($response);
         } else {
             //chercher toutes les plantes dans la base de donnees

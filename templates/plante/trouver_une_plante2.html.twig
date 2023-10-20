@@ -1,7 +1,8 @@
 {% extends "base.html.twig" %}
 {% block stylesheets %}
 	{{parent()}}
-	{{ encore_entry_link_tags('findPlante2') }}
+	{{ encore_entry_link_tags('findPlante')}}
+
 {% endblock %}
 
 
@@ -13,6 +14,7 @@
 		<div class="row border-top px-xl-5">
 			<div class="col-lg-2 d-none d-lg-block">
 				<section class="filtres">
+
 
 
 					<div class="accordion" id="accordionPanelsStayOpenExample">
@@ -125,7 +127,7 @@
 												<a class="favorite-button" data-route="/plante/listSouhait/" data-id="{{ plante.id }}" id="heart">
 													<span class="like">
 													{% if app.user and app.user.plantes.contains(plante) %}
-														<i class="fab fa-gratipay" style="color:#E74C3C"></i>Like
+														<i class="fab fa-gratipay fa-gratipay-like"></i>Like
 													{% else %}
 														<i class="fab fa-gratipay"></i>Like
 													{% endif %}

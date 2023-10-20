@@ -24,7 +24,9 @@
 		
 				<a id="favorite_list_button" data-route="/plante/favorit_plantes/" href="" class="btn border">
 					<i class="fas fa-heart text-primary"></i>
-					<span id="favorite_list" class="badge">0</span>
+					<span id="favorite_list" class="badge">{% if app.user %}{{app.user.plantes.count}}
+					{% else %}0
+					{% endif %}</span>
 				</a>
 				<a href="" class="btn border">
 					<i class="fas fa-shopping-cart text-primary"></i>
