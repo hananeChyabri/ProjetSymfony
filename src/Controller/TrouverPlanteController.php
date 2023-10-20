@@ -25,10 +25,10 @@ class TrouverPlanteController extends AbstractController
 
         $formulaireFiltrePlante = $this->createForm(FiltrePlanteType::class);
 
-        $formulaireFiltrePlante->handleRequest($req);   
+        $formulaireFiltrePlante->handleRequest($req);
 
         if ($formulaireFiltrePlante->isSubmitted() && $formulaireFiltrePlante->isValid()) {
-       
+
             $rep = $doctrine->getRepository(Plante::class);
             $resultats = $rep->recherchePlanteFiltres($formulaireFiltrePlante->getData());
 
@@ -46,33 +46,31 @@ class TrouverPlanteController extends AbstractController
                 $arrPlante['images'] = [];
                 foreach ($plante->getImages() as $image) {
                     // rajouter le nom de l'auteur à l'array
-                $arrPlante['images'][] = $image->getUrl();
+                    $arrPlante['images'][] = $image->getUrl();
                 }
-          
+
                 // rajouter le livre ayant l'array d'auteurs incrusté
                 $plantes[] = $arrPlante;
             }
-         
-   
-         
-          
+
+
+
+
             $response = $serializer->serialize($plantes, 'json', [AbstractNormalizer::IGNORED_ATTRIBUTES => ['images']]);
-         
 
-            return new Response ($response);
 
-        }
-        else{
-    //chercher toutes les plantes dans la base de donnees
-    $em = $doctrine->getManager();
-    $query = $em->createQuery("SELECT plante FROM App\Entity\Plante plante");
-    $res = $query->getResult();
-    $vars = ['listePlantes' => $res,'form' => $formulaireFiltrePlante];
+            return new Response($response);
+        } else {
+            //chercher toutes les plantes dans la base de donnees
+            $user = $this->getUser();
+            if (!$user) {
+            }
+            $em = $doctrine->getManager();
+
+            $rep = $doctrine->getRepository(Plante::class);
+            $res = $rep->recherchePlanteFiltres();
+            $vars = ['listePlantes' => $res, 'form' => $formulaireFiltrePlante];
         }
         return $this->render('plante/trouver_une_plante2.html.twig', $vars);
     }
-
-    
-
-
 }

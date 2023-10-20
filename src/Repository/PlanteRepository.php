@@ -51,7 +51,7 @@ class PlanteRepository extends ServiceEntityRepository
 
 
     // méthode propre: recherche par filtres
-    public function recherchePlanteFiltres($filtres)
+    public function recherchePlanteFiltres($filtres = [])
     {
 
 
@@ -75,14 +75,14 @@ class PlanteRepository extends ServiceEntityRepository
 
 
         $dql = 'SELECT plante FROM App\Entity\Plante plante';
-        $exposition = $filtres['exposition']; /* Récupérez la valeur du filtre exposition */;
-        $besoinEau = $filtres['besoinEau'];/* Récupérez la valeur du filtre besoin eau */;
-        $lieuCultive = $filtres['lieuCultive'];/* Récupérez la valeur du filtre lieuCultive */;
-        if ($exposition) {
 
+        $exposition = isset($filtres['exposition']) ? $filtres['exposition'] : null;
+        $besoinEau = isset($filtres['besoinEau']) ? $filtres['besoinEau'] : null;
+        $lieuCultive = isset($filtres['lieuCultive']) ? $filtres['lieuCultive'] : null;
+
+        if ($exposition) {
             $dql .= ' WHERE plante.exposition IN (:exposition)';
         }
-
         if ($besoinEau) {
 
             $dql .= ($exposition ? ' AND' : ' WHERE') . ' plante.besoinEau IN (:besoinEau)';
@@ -109,6 +109,7 @@ class PlanteRepository extends ServiceEntityRepository
 
 
         $resultats = $query->getResult();
+
         return $resultats;
     }
 }

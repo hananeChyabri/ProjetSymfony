@@ -124,7 +124,12 @@
 												<a class="detaillePlante waves-effect waves-light btn" href="{{ path('detaillePlante', {'id': plante.id}) }}">Read More</a>
 												<a class="favorite-button" data-route="/plante/listSouhait/" data-id="{{ plante.id }}" id="heart">
 													<span class="like">
-														<i class="fab fa-gratipay"></i>Like</span>
+													{% if app.user and app.user.plantes.contains(plante) %}
+														<i class="fab fa-gratipay" style="color:#E74C3C"></i>Like
+													{% else %}
+														<i class="fab fa-gratipay"></i>Like
+													{% endif %}
+													</span>
 												</a>
 											</p>
 											<p class="txt3">
