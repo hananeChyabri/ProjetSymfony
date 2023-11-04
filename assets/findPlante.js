@@ -51,7 +51,7 @@ function genererPlantes(arrayPlantes) {
 
     // Parcourir la liste de plantes
     arrayPlantes.forEach(function (plante) {
-      
+
         var colDiv = document.createElement('div');
         colDiv.className = 'col-lg-3 col-md-6 pb-1';
 
@@ -67,13 +67,13 @@ function genererPlantes(arrayPlantes) {
         // Parcourir les images de la plante
 
         plante.images.forEach(function (url) {
-        
+
             var a = document.createElement('a');
             a.href = '/plante/detaille/' + plante.id;
             a.className = 'detaillePlante cat-img position-relative overflow-hidden mb-3';
 
             var img = document.createElement('img');
-      
+
             img.src = "/" + url;
 
             a.appendChild(img);
@@ -81,7 +81,7 @@ function genererPlantes(arrayPlantes) {
         });
 
         var photosDiv = document.createElement('div');
-        photosDiv.className = 'photos';
+        photosDiv.className = 'nomPlante';
         photosDiv.textContent = plante.nom;
 
         var contentDiv = document.createElement('div');
@@ -102,13 +102,22 @@ function genererPlantes(arrayPlantes) {
         var footerDiv = document.createElement('div');
         footerDiv.className = 'footer';
 
-        var detaillePlanteLink = document.createElement('a');
-        detaillePlanteLink.href = '/plante/detaille/' + plante.id;
-        detaillePlanteLink.className = 'detaillePlante waves-effect waves-light btn';
-        detaillePlanteLink.textContent = 'Read More';
 
-        var favoriteButtonLink = document.createElement('a');
-        favoriteButtonLink.className = 'favorite-button'
+        let paralikebutton = document.createElement('p');
+        // Créez un nouvel élément span poyr le prix de la plante
+        var spanPrix = document.createElement('span');
+
+        // Ajoutez les classes au nouvel élément
+        spanPrix.classList.add('waves-effect', 'waves-light', 'btnPrice');
+
+        // Définissez le contenu texte de l'élément
+        spanPrix.textContent = '123 $';
+
+        // Ajoutez l'élément au document (par exemple, au corps du document)
+        paralikebutton.appendChild(spanPrix);
+
+        let favoriteButtonLink = document.createElement('a');
+        favoriteButtonLink.className = 'favorite-button like'
 
         favoriteButtonLink.setAttribute('data-route', '/plante/listSouhait/');
         favoriteButtonLink.setAttribute('data-id', plante.id);
@@ -116,42 +125,35 @@ function genererPlantes(arrayPlantes) {
 
         favoriteButtonLink.addEventListener("click", AjouterListFavoris);
 
-        var likeSpan = document.createElement('span');
-        likeSpan.className = 'like';
+
 
         // afficher en fonction de si la plante a ete like
         var gratipayIcon = document.createElement('i');
         gratipayIcon.className = 'fab fa-gratipay';
         if (plante.like) {
-           
+
             gratipayIcon.classList.add("fa-gratipay-like");
         }
 
-        likeSpan.appendChild(gratipayIcon);
-        likeSpan.appendChild(document.createTextNode('Like'));
-        favoriteButtonLink.appendChild(likeSpan);
+        favoriteButtonLink.appendChild(gratipayIcon);
+        paralikebutton.appendChild(favoriteButtonLink);
 
-        var txt3Paragraph = document.createElement('p');
-        txt3Paragraph.className = 'txt3';
+        let buttonAcheterParagraph = document.createElement('p');
 
-        var clockIcon = document.createElement('i');
-        clockIcon.className = 'far fa-clock';
+        let buyButton = document.createElement('button');
+        buyButton.classList.add('btnAddCart');
+        buyButton.textContent = 'Acheter';
 
-        var minutesAgo = document.createTextNode('10 Minutes Ago');
-        var commentsIcon = document.createElement('i');
-        commentsIcon.className = 'fas fa-comments';
+        // Créez une icône de panier
+        var cartIcon = document.createElement('i');
+        cartIcon.classList.add('fas', 'fa-shopping-cart', 'text-primary');
 
-        var commentsSpan = document.createElement('span');
-        commentsSpan.className = 'comments';
-        commentsSpan.appendChild(commentsIcon);
-        commentsSpan.appendChild(document.createTextNode('45 Comments'));
+        // Ajoutez l'icône au bouton d'achat
+        buyButton.appendChild(cartIcon);
+        buttonAcheterParagraph.appendChild(buyButton);
 
-        txt3Paragraph.appendChild(clockIcon);
-        txt3Paragraph.appendChild(minutesAgo);
-        txt3Paragraph.appendChild(commentsSpan);
-
-        footerDiv.appendChild(detaillePlanteLink);
-        footerDiv.appendChild(favoriteButtonLink);
+        footerDiv.appendChild(paralikebutton);
+        footerDiv.appendChild(buttonAcheterParagraph);
 
         contentDiv.appendChild(txt4Exposition);
         contentDiv.appendChild(txt4BesoinEau);
@@ -177,57 +179,58 @@ function genererPlantes(arrayPlantes) {
 let boutons = document.querySelectorAll('.favorite-button');
 // Parcourez la liste des boutons et ajoutez un écouteur d'événements à chacun
 boutons.forEach(function (bouton) {
-    bouton.addEventListener("click", AjouterListFavoris);});
-    function AjouterListFavoris(event) {
-        event.preventDefault();
-        let fovorits = document.getElementById("favorite_list");
+    bouton.addEventListener("click", AjouterListFavoris);
+});
+function AjouterListFavoris(event) {
+    event.preventDefault();
+    let fovorits = document.getElementById("favorite_list");
 
-        const planteId = event.target.parentElement.dataset.id;
-   
-        // on prend la route generee avec path du data-route du form
-        let formLike = new FormData();
-        formLike.append("id", planteId);
+    const planteId = event.target.parentElement.dataset.id;
+
+    // on prend la route generee avec path du data-route du form
+    let formLike = new FormData();
+    formLike.append("id", planteId);
 
 
-        axios.post(event.target.parentElement.dataset.route, formLike, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-        }).then(function (response) { // Gérez la réponse du serveur (par exemple, actualisez l'interface utilisateur)
+    axios.post(event.target.parentElement.dataset.route, formLike, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+    }).then(function (response) { // Gérez la réponse du serveur (par exemple, actualisez l'interface utilisateur)
 
-            // on rajoute la plante
-            if (response.data.rajoute) {
-                fovorits.innerText = +fovorits.innerText + 1;
-                var heartElement = event.target.parentElement.querySelector('.like .fab.fa-gratipay');
-             
-                heartElement.classList.add("fa-gratipay-like");
-                console.log('rajoute');
+        // on rajoute la plante
+        if (response.data.rajoute) {
+            fovorits.innerText = +fovorits.innerText + 1;
+            var heartElement = event.target.parentElement.querySelector('.like .fab.fa-gratipay');
+
+            heartElement.classList.add("fa-gratipay-like");
+            console.log('rajoute');
+        }
+        // on enleve la plante
+        else {
+            fovorits.innerText = +fovorits.innerText - 1;
+            var heartElement = event.target.parentElement.querySelector('.like .fab.fa-gratipay');
+
+            heartElement.classList.remove("fa-gratipay-like");
+            heartElement.classList.remove("fa-gratipay-like");
+            console.log('enleve');
+
+        }
+
+    }).catch(function (error) {
+
+        if (error.response) {
+            if (error.response.status === 404) {
+                alert(error.response.data.message);
             }
-            // on enleve la plante
-            else {
-                fovorits.innerText = +fovorits.innerText - 1;
-                var heartElement = event.target.parentElement.querySelector('.like .fab.fa-gratipay');
-                
-                heartElement.classList.remove("fa-gratipay-like");
-                heartElement.classList.remove("fa-gratipay-like");
-                console.log('enleve');
+        }
 
-            }
-
-        }).catch(function (error) {
-
-            if (error.response) {
-                if (error.response.status === 404) {
-                    alert(error.response.data.message);
-                }
-            }
-
-        });
+    });
 
 
 
 
-    }
+}
 
 
 
@@ -280,7 +283,7 @@ bouton_favorits.addEventListener('click', function (event) {
 let bouton_recherche = document.querySelector('fa-search');
 bouton_recherche.addEventListener('click', function (event) {
     event.preventDefault();
-    
+
 
     axios({
         // on prend la route generee avec path du data-route du form
@@ -295,8 +298,8 @@ bouton_recherche.addEventListener('click', function (event) {
 
         let arrayPlantes = response.data;
 
-            genererPlantes(arrayPlantes);
-    
+        genererPlantes(arrayPlantes);
+
 
 
     }).catch(error => {

@@ -52,7 +52,18 @@ class FiltrePlanteType extends AbstractType
 
         ])
 
-  
+   ->add('resistanceFroid', ChoiceType::class, [
+            'choices' => [
+                'Résistante' => 'Résistante',
+                'Fragile' => 'Fragile',
+                'À protéger' => 'À protéger',
+            ],
+            'multiple' => true, // Autorise la sélection de plusieurs options
+            'expanded' => true, // Affiche les options sous forme de cases à cocher
+           
+
+        ])
+        
         ;
 
 

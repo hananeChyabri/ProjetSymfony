@@ -53,43 +53,21 @@ class PlanteRepository extends ServiceEntityRepository
     // méthode propre: recherche par filtres
     public function recherchePlanteFiltres($filtres = [])
     {
-
-
-
         $em = $this->getEntityManager();
-        //  $query = $em->createQuery (
-        //          "SELECT plante FROM App\Entity\Plante plante
-        //          WHERE
-
-        //             (plante.exposition IN (:exposition) OR :exposition IS NULL)
-        //             AND
-        //             (plante.besoinEau IN (:besoinEau) OR :besoinEau IS NULL) "
-        //  );
-
-
-
-        //  $query->setParameter("exposition", $filtres['exposition']);
-
-        //  $query->setParameter("besoinEau", $filtres['besoinEau']);
-        // //  $query->setParameter("lieuCultive", $filtres['lieuCultive']);
-
-
-        $dql = 'SELECT plante FROM App\Entity\Plante plante';
+        $dql = 'SELECT plante FROM App\Entity\Plante plante WHERE 1=1';
 
         $exposition = isset($filtres['exposition']) ? $filtres['exposition'] : null;
         $besoinEau = isset($filtres['besoinEau']) ? $filtres['besoinEau'] : null;
         $lieuCultive = isset($filtres['lieuCultive']) ? $filtres['lieuCultive'] : null;
 
         if ($exposition) {
-            $dql .= ' WHERE plante.exposition IN (:exposition)';
+            $dql .= ' AND plante.exposition IN (:exposition)';
         }
         if ($besoinEau) {
-
-            $dql .= ($exposition ? ' AND' : ' WHERE') . ' plante.besoinEau IN (:besoinEau)';
+            $dql .= ' AND plante.besoinEau IN (:besoinEau)';
         }
         if ($lieuCultive) {
-
-            $dql .= ($exposition ? ' AND' : ' WHERE') . ' plante.lieuCultive IN (:lieuCultive)';
+            $dql .= ' AND plante.lieuCultive IN (:lieuCultive)';
         }
         $query = $em->createQuery($dql);
 
@@ -106,7 +84,7 @@ class PlanteRepository extends ServiceEntityRepository
             $query->setParameter('lieuCultive', $filtres['lieuCultive']);
         }
 
-        
+
         $resultats = $query->getResult();
         // dd($resultats);
 

@@ -1,87 +1,81 @@
 <!-- Topbar Start -->
-	<div class="container-fluid">
+<div class="container-fluid">
 
-		<div class="row align-items-center py-3 px-xl-5">
-			<div class="col-lg-3 d-none d-lg-block">
-				<a class="text-decoration-none" href="{{ path('maPlante') }}">
-					<h1 class="m-0 display-5 font-weight-semi-bold">
-						<span class="text-primary font-weight-bold border px-3 mr-1">E</span>plante</h1>
-				</a>
-			</div>
-			<div class="col-lg-6 col-6 text-left">
-				<form action="">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search for products">
-						<div class="input-group-append">
-							<span class="input-group-text bg-transparent text-primary">
-								<i class="fa fa-search"></i>
-							</span>
-						</div>
+	<div class="row align-items-center py-3 px-xl-5">
+		<div class="col-lg-3 d-none d-lg-block">
+			<a class="text-decoration-none" href="{{ path('maPlante') }}">
+				<h1 class="m-0 display-5 font-weight-semi-bold">
+					<span class="text-primary font-weight-bold border px-3 mr-1">E</span>plante</h1>
+			</a>
+		</div>
+		<div class="col-lg-6 col-6 text-left">
+			<form action="">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search for products">
+					<div class="input-group-append">
+						<span class="input-group-text bg-transparent text-primary">
+							<i class="fa fa-search"></i>
+						</span>
 					</div>
-				</form>
-			</div>
-			<div class="col-lg-3 col-6 text-right">
-		
-				<a id="favorite_list_button" data-route="/plante/favorit_plantes/" href="" class="btn border">
-					<i class="fas fa-heart text-primary"></i>
-					<span id="favorite_list" class="badge">{% if app.user %}{{app.user.plantes.count}}
-					{% else %}0
-					{% endif %}</span>
-				</a>
-				<a href="" class="btn border">
-					<i class="fas fa-shopping-cart text-primary"></i>
-					<span class="badge">0</span>
-				</a>
-			</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-lg-3 col-6 text-right">
+
+			<a id="favorite_list_button" data-route="/plante/favorit_plantes/" href="" class="btn border">
+				<i class="fas fa-heart text-primary"></i>
+				<span id="favorite_list" class="badge">
+					{% if app.user %}
+						{{app.user.plantes.count}}
+						{% else %}0
+					{% endif %}
+				</span>
+			</a>
+			<a href="" class="btn border">
+				<i class="fas fa-shopping-cart text-primary"></i>
+				<span class="badge">0</span>
+			</a>
 		</div>
 	</div>
-	<!-- Topbar End -->
-
-
-
+</div>
+<!-- Topbar End -->
 
 
 <!-- ======= Header ======= -->
 <header id="header" class="d-flex align-items-center">
 	<div class="container d-flex align-items-center">
 
-		
+
 		<!-- Uncomment below if you prefer to use an image logo -->
 		<!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-		<nav id="navbar" class="navbar">
-			<ul>
+			<nav id="navbar" class="navbar"> <ul>
 				<li>
 					<a class="nav-link scrollto active" href="{{ path('maPlante') }}">Home</a>
 				</li>
 				<li>
-					<a class="nav-link scrollto" href="#about">About</a>
+					<a class="nav-link scrollto" href="{{ path('app_home') }}">About</a>
 				</li>
 				<li>
-					<a class="nav-link scrollto" href="{{ path('maPlante') }}">
-						Trouver une plante</a>
+					<a class="nav-link scrollto" href="{{ path('maPlante') }}">Trouver une plante</a>
 				</li>
 
 				<li>
-
-
-					<a class="nav-link scrollto" href="{{ path('app_register') }}">
-						Inscription</a>
+					<a class="nav-link scrollto" href="{{ path('app_register') }}">Inscription</a>
 				</li>
+				{% if not app.user %}
 				<li>
-					<a class="nav-link scrollto" href="{{ path('app_login') }}">
-						login</a>
+					<a class="nav-link scrollto" href="{{ path('app_login') }}">login</a>
 				</li>
+				{% else %}
 					<li>
-					<a href="{{ path('app_logout') }}">Logout</a>
-				</li>
+						<a href="{{path('app_logout')}}">Logout</a>
+					</li>
+				{% endif %}
 			</ul>
 
 
 		</li>
-
-
-
 
 
 	</ul>
