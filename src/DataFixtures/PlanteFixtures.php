@@ -11,7 +11,7 @@ class PlanteFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create();
+        $faker = Factory::create('fr_FR');
         //type de feuillage
         $nomsPlantes = ['Rose', 'Tulipe', 'Lavande', 'Orchidée', 'Lilas', 'Hortensia', 'Jonquille', 'Pivoine', 'Aloe Vera', 'Fougère', 'Bonsaï', 'Bambou'];
         $typeFeuillage = array("Persistant", "Caduc");

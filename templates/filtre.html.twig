@@ -87,6 +87,26 @@
 								</div>
 							</div>
 						</div>
+
+						      <div class="accordion-item">
+							<h2 class="accordion-header" id="panelsStayOpen-headingfive">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+									Couleur
+								</button>
+							</h2>
+							<div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingfive">
+								<div class="accordion-body">
+
+									{% for choice, value in form.couleur %}
+										<div class="custom-radio">
+											{{ form_widget(value, { 'attr': {'class': 'custom-control-input'} }) }}
+											<label class="custom-control-label" for="{{ value.vars.id }}">{{ value.vars.value }}</label>
+										</div>
+									{% endfor %}
+
+								</div>
+							</div>
+						</div>
 						{{ form_end(form) }}
 					</div>
 				</section>

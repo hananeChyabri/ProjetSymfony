@@ -59,6 +59,8 @@ class PlanteRepository extends ServiceEntityRepository
         $exposition = isset($filtres['exposition']) ? $filtres['exposition'] : null;
         $besoinEau = isset($filtres['besoinEau']) ? $filtres['besoinEau'] : null;
         $lieuCultive = isset($filtres['lieuCultive']) ? $filtres['lieuCultive'] : null;
+        $resistanceFroid = isset($filtres['resistanceFroid']) ? $filtres['resistanceFroid'] : null;
+        $couleur = isset($filtres['couleur']) ? $filtres['couleur'] : null;
 
         if ($exposition) {
             $dql .= ' AND plante.exposition IN (:exposition)';
@@ -68,6 +70,12 @@ class PlanteRepository extends ServiceEntityRepository
         }
         if ($lieuCultive) {
             $dql .= ' AND plante.lieuCultive IN (:lieuCultive)';
+        }
+        if ($resistanceFroid) {
+            $dql .= ' AND plante.resistanceFroid IN (:resistanceFroid)';
+        }
+        if ($couleur) {
+            $dql .= ' AND plante.couleurFleur IN (:couleur)';
         }
         $query = $em->createQuery($dql);
 
@@ -83,6 +91,15 @@ class PlanteRepository extends ServiceEntityRepository
 
             $query->setParameter('lieuCultive', $filtres['lieuCultive']);
         }
+        if ($resistanceFroid) {
+
+            $query->setParameter('resistanceFroid', $filtres['resistanceFroid']);
+        }
+        if ($couleur) {
+
+            $query->setParameter('couleur', $filtres['couleur']);
+        }
+
 
 
         $resultats = $query->getResult();
