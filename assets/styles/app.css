@@ -217,7 +217,7 @@ body {
 }
 
 .navbar ul {
-  margin: 199px;
+  margin: 0px;
     padding: 0;
     display: flex;
     list-style: none;
