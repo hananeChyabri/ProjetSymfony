@@ -96,6 +96,8 @@ class AddWishListController extends AbstractController
                 $arrPlante['exposition'] = $plante->getExposition();
                 $arrPlante['besoinEau'] = $plante->getBesoinEau();
                 $arrPlante['lieuCultive'] = $plante->getLieuCultive();
+                $arrPlante['description'] = $plante->getDescription();
+                $arrPlante['niveauSoin'] = $plante->getNiveauSoin();
                 $arrPlante['images'] = [];
                 foreach ($plante->getImages() as $image) {
                     // rajouter le nom de l'auteur à l'array

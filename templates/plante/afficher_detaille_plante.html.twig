@@ -1,90 +1,120 @@
 {% extends "base.html.twig" %}
 {% block stylesheets %}
 	{{parent()}}
-
+	{{ encore_entry_link_tags('detaillePlante')}}
 {% endblock %}
 
 
 {% block body %}
 
+	<section id="about" class="about">
+		<div class="container">
+
+			<div class="section-title">
+				<h2>{{Plante.nom}}</h2>
+				<p>{{Plante.description}}</p>
+			</div>
+
+			<div class="row">
+				<div
+					class="col-lg-6 ">
+					{# <img src="/images/about.jpg" class="img-fluid" alt="">              #}
+					<div id="carouselExample" class="carousel slide">
+						<div class="carousel-inner">
+							<div class="carousel-item  active">
+								<img src="/images/about.jpg" class="img-fluid" alt="">
+							</div>
+							{% for image in Plante.images %}
+
+								<div class="carousel-item">
+									<img src="{{asset(image.url) }}" class="img-fluid" alt="">
+								</div>
+							{% endfor %}
+
+						</div>
+						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
+					</div>
+				</div>
+				<div class="col-lg-6">
+						<div class="row no-gutters">
+
+							<div class="col-lg-4 col-md-6 content-item">
+
+								<h4>Nom commun</h4>
+								<p>{{Plante.nom}}</p>
+							</div>
+							<div class="col-lg-4 col-md-6 content-item">
+
+								<h4>Nom commun</h4>
+								<p>{{Plante.nom}}</p>
+							</div>
+
+							<div class="col-lg-4 col-md-6 content-item">
+
+								<h4>Famille</h4>
+								<p>{{Plante.familleBotanique}}</p>
+							</div>
+
+							<div class="col-lg-4 col-md-6 content-item">
+
+								<h4>Besoin en eau</h4>
+								<p>{{Plante.besoinEau}}</p>
+							</div>
+
+							<div class="col-lg-4 col-md-6 content-item">
+
+								<h4>Feuillage
+								</h4>
+								<p>{{Plante.typeDeFeuillage}}</p>
+							</div>
+
+							<div class="col-lg-4 col-md-6 content-item">
+								<h4>
+									Entretien
+								</h4>
+								<p>{{Plante.niveauSoin}}</p>
+							</div>
+
+							<div class="col-lg-4 col-md-6 content-item">
+
+								<h4>Exposition
+								</h4>
+								<p>{{Plante.exposition}}</p>
+							</div>
+							<div class="col-lg-4 col-md-6 content-item">
+
+								<h4>humidite_sol
+								</h4>
+								<p>{{Plante.humiditeSol}}</p>
+							</div>
+							<div class="col-lg-4 col-md-6 content-item">
+
+								<h4>Croissance
+								</h4>
+								<p>{{Plante.croissance}}</p>
+							</div>
+							<div class="col-lg-4 col-md-6 content-item">
+
+								<h4>
+									type de plante
+								</h4>
+								<p>{{Plante.typePlante}}</p>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
 
 
-
-    <!-- ======= About Us Section ======= -->
-    <section id="about" class="about">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>{{Plante.nom}}</h2>
-          <p>{{Plante.description}}</p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6 order-1 order-lg-2">
-            <img src="/images/about.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-              <div class="why-us container">
-
-        <div class="row no-gutters">
-
-          <div class="col-lg-4 col-md-6 content-item">
-            
-            <h4>Nom commun</h4>
-            <p>{{Plante.nom}}</p>
-          </div>
-
-          <div class="col-lg-4 col-md-6 content-item">
-           
-            <h4>Famille</h4>
-            <p>{{Plante.familleBotanique}}</p>
-          </div>
-
-          <div class="col-lg-4 col-md-6 content-item">
-      
-            <h4>Besoin en eau</h4>
-            <p>{{Plante.besoinEau}}</p>
-          </div>
-
-          <div class="col-lg-4 col-md-6 content-item">
-           
-            <h4>Feuillage </h4>
-            <p>{{Plante.typeDeFeuillage}}</p>
-          </div>
-
-          <div class="col-lg-4 col-md-6 content-item">
-            <h4> Entretien </h4>
-            <p>{{Plante.niveauSoin}}</p>
-          </div>
-
-          <div class="col-lg-4 col-md-6 content-item">
-       
-            <h4>Exposition </h4>
-            <p>{{Plante.exposition}}</p>
-          </div>
-		   <div class="col-lg-4 col-md-6 content-item">
-       
-            <h4>humidite_sol </h4>
-            <p>{{Plante.humiditeSol}}</p>
-          </div>
-		   <div class="col-lg-4 col-md-6 content-item">
-       
-            <h4>Croissance </h4>
-            <p>{{Plante.croissance}}</p>
-          </div>
-		   <div class="col-lg-4 col-md-6 content-item">
-       
-            <h4> type de plante </h4>
-            <p>{{Plante.typePlante}}</p>
-          </div>
-
-        </div>
-
-      </div>
-          </div>
-        </div>
-
-      </div>
-
-
-		{% endblock %}
+	{% endblock %}

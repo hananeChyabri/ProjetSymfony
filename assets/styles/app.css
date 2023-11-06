@@ -217,7 +217,7 @@ body {
 }
 
 .navbar ul {
-    margin: 0;
+  margin: 199px;
     padding: 0;
     display: flex;
     list-style: none;
@@ -270,6 +270,9 @@ body {
     background: #5cb874;
     color: #fff;
 }
+
+
+
 
 
 

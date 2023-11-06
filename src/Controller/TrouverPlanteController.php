@@ -61,9 +61,6 @@ class TrouverPlanteController extends AbstractController
             return new Response($response);
         } else {
             //chercher toutes les plantes dans la base de donnees
-            $user = $this->getUser();
-            if (!$user) {
-            }
             $em = $doctrine->getManager();
 
             $rep = $doctrine->getRepository(Plante::class);

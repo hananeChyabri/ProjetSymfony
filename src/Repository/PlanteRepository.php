@@ -53,29 +53,29 @@ class PlanteRepository extends ServiceEntityRepository
     // méthode propre: recherche par filtres
     public function recherchePlanteFiltres($filtres = [])
     {
-
-
-
         $em = $this->getEntityManager();
-     
-
-
-        $dql = 'SELECT plante FROM App\Entity\Plante plante';
+        $dql = 'SELECT plante FROM App\Entity\Plante plante WHERE 1=1';
 
         $exposition = isset($filtres['exposition']) ? $filtres['exposition'] : null;
         $besoinEau = isset($filtres['besoinEau']) ? $filtres['besoinEau'] : null;
         $lieuCultive = isset($filtres['lieuCultive']) ? $filtres['lieuCultive'] : null;
+        $resistanceFroid = isset($filtres['resistanceFroid']) ? $filtres['resistanceFroid'] : null;
+        $couleur = isset($filtres['couleur']) ? $filtres['couleur'] : null;
 
         if ($exposition) {
-            $dql .= ' WHERE plante.exposition IN (:exposition)';
+            $dql .= ' AND plante.exposition IN (:exposition)';
         }
         if ($besoinEau) {
-
-            $dql .= ($exposition ? ' AND' : ' WHERE') . ' plante.besoinEau IN (:besoinEau)';
+            $dql .= ' AND plante.besoinEau IN (:besoinEau)';
         }
         if ($lieuCultive) {
-
-            $dql .= ($exposition ? ' AND' : ' WHERE') . ' plante.lieuCultive IN (:lieuCultive)';
+            $dql .= ' AND plante.lieuCultive IN (:lieuCultive)';
+        }
+        if ($resistanceFroid) {
+            $dql .= ' AND plante.resistanceFroid IN (:resistanceFroid)';
+        }
+        if ($couleur) {
+            $dql .= ' AND plante.couleurFleur IN (:couleur)';
         }
         $query = $em->createQuery($dql);
 
@@ -91,7 +91,19 @@ class PlanteRepository extends ServiceEntityRepository
 
             $query->setParameter('lieuCultive', $filtres['lieuCultive']);
         }
+        if ($resistanceFroid) {
 
+            $query->setParameter('resistanceFroid', $filtres['resistanceFroid']);
+        }
+        if ($couleur) {
+
+            $query->setParameter('couleur', $filtres['couleur']);
+        }
+
+
+
+        $resultats = $query->getResult();
+        // dd($resultats);
 
 
         $resultats = $query->getResult();

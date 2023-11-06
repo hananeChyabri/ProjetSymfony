@@ -1,0 +1,113 @@
+<!-- Navbar Start -->
+	<div class="container-fluid mb-5">
+		<div class="row border-top px-xl-5">
+			<div class="col-lg-3 d-none d-lg-block">
+				<section class="filtres">
+
+
+					<div class="accordion" id="accordionPanelsStayOpenExample">
+						{{ form_start(form, {'attr': {'id': 'filtre-form-plante',
+											'data-route': path("maPlante") }}) }}
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="panelsStayOpen-headingOne">
+								<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+									Exposition
+								</button>
+							</h2>
+							<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+								<div class="accordion-body">
+
+									{% for choice, value in form.exposition %}
+										<div class="custom-radio">
+											{{ form_widget(value, { 'attr': {'class': 'custom-control-input'} }) }}
+											<label class="custom-control-label" for="{{ value.vars.id }}">{{ value.vars.value }}</label>
+										</div>
+									{% endfor %}
+
+
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+									Arrosage
+								</button>
+							</h2>
+							<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+								<div class="accordion-body">
+
+									{% for choice, value in form.besoinEau %}
+										<div class="custom-radio">
+											{{ form_widget(value, { 'attr': {'class': 'custom-control-input'} }) }}
+											<label class="custom-control-label" for="{{ value.vars.id }}">{{ value.vars.value }}</label>
+										</div>
+									{% endfor %}
+
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="panelsStayOpen-headingThree">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+									Emplacement
+								</button>
+							</h2>
+							<div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+								<div class="accordion-body">
+
+									{% for choice, value in form.lieuCultive %}
+										<div class="custom-radio">
+											{{ form_widget(value, { 'attr': {'class': 'custom-control-input'} }) }}
+											<label class="custom-control-label" for="{{ value.vars.id }}">{{ value.vars.value }}</label>
+										</div>
+									{% endfor %}
+
+								</div>
+							</div>
+						</div>
+
+                        <div class="accordion-item">
+							<h2 class="accordion-header" id="panelsStayOpen-headingfour">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapsefour" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+									Résistance froid
+								</button>
+							</h2>
+							<div id="panelsStayOpen-collapsefour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingfour">
+								<div class="accordion-body">
+
+									{% for choice, value in form.resistanceFroid %}
+										<div class="custom-radio">
+											{{ form_widget(value, { 'attr': {'class': 'custom-control-input'} }) }}
+											<label class="custom-control-label" for="{{ value.vars.id }}">{{ value.vars.value }}</label>
+										</div>
+									{% endfor %}
+
+								</div>
+							</div>
+						</div>
+
+						      <div class="accordion-item">
+							<h2 class="accordion-header" id="panelsStayOpen-headingfive">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+									Couleur
+								</button>
+							</h2>
+							<div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingfive">
+								<div class="accordion-body">
+
+									{% for choice, value in form.couleur %}
+										<div class="custom-radio">
+											{{ form_widget(value, { 'attr': {'class': 'custom-control-input'} }) }}
+											<label class="custom-control-label" for="{{ value.vars.id }}">{{ value.vars.value }}</label>
+										</div>
+									{% endfor %}
+
+								</div>
+							</div>
+						</div>
+						{{ form_end(form) }}
+					</div>
+				</section>
+			</div>
