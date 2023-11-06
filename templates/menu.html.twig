@@ -9,15 +9,33 @@
 				</a>
 			</div>
 			<div class="col-lg-6 col-6 text-left">
-				<form action="">
+				<form action="" id="recherche_plante_form" data-route="/plante/recherche_plante">
+
+                    <div class="input-group">
+                        <input type="text" class="form-control inputRecherche" placeholder="Search for plante">
+                        
+						<div class="input-group-append">
+						
+                            <span class="input-group-text bg-transparent text-primary">
+                               <a id="recherchePlante" data-route="/plante/recherche_plante" href=""> <i class="fa fa-search"></i>
+                           </a> </span>
+                        </div>
+						
+                    </div>
+                
+
+
+					{# <a id="recherchePlante" data-route="/plante/trouver_une_plante" href="">
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="Search for products">
+						
 						<div class="input-group-append">
-							<span class="input-group-text bg-transparent text-primary">
+							<span class="input-group-text bg-transparent text-primary" >
 								<i class="fa fa-search"></i>
 							</span>
 						</div>
-					</div>
+							</div>
+					</a>	 #}
 				</form>
 			</div>
 			<div class="col-lg-3 col-6 text-right">

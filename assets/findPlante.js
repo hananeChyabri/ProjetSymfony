@@ -11,6 +11,7 @@ const form = document.getElementById('filtre-form-plante');
 // on detectera tous les inputs du form, peu importe quel fitre on change
 form.addEventListener('change', function (event) {
 
+
     event.preventDefault();
     // obtenir le div pour afficher les résultats
 
@@ -273,37 +274,45 @@ bouton_favorits.addEventListener('click', function (event) {
 });
 
 
-/* axiox pour la recherche */
+/* axiox pour la recherche*/ 
 
 
 
-let bouton_recherche = document.querySelector('fa-search');
-bouton_recherche.addEventListener('click', function (event) {
-    event.preventDefault();
-    
+let bouton_recherche = document.querySelector('#recherchePlante');
+bouton_recherche.addEventListener("click", RecherchePlante);
+    function RecherchePlante(event) {
+        event.preventDefault();
+      
+   
+   
+        let formLike = new FormData();
+        //recuperer le champs de recherche
+        let inputRecherche = document.querySelector(".inputRecherche").value;
 
-    axios({
-        // on prend la route generee avec path du data-route du form
-        url: bouton_favorits.dataset.route,
-        method: 'POST',
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        },
-        data: new FormData()
-    }).then(function (response) {
+        formLike.append("nom", inputRecherche);
 
 
-        let arrayPlantes = response.data;
+        axios.post(event.target.parentElement.dataset.route, formLike, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+        }).then(function (response) { // Gérez la réponse du serveur (par exemple, actualisez l'interface utilisateur)
 
-            genererPlantes(arrayPlantes);
-    
+       // parcourir l'array d'objets reçu (car le JSON a été déjà parsé par AXIOS)
+       let arrayPlantes = response.data;
+
+       genererPlantes(arrayPlantes);
+           
+
+        }).catch(function (error) {
+
+            if (error.response) {
+             
+                    alert(error.response.data.message);
+                
+            }
+
+        });
 
 
-    }).catch(error => {
-        console.error(error);
-    });
-});
-
-
-
-
+    }

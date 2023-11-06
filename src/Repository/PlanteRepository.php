@@ -57,21 +57,7 @@ class PlanteRepository extends ServiceEntityRepository
 
 
         $em = $this->getEntityManager();
-        //  $query = $em->createQuery (
-        //          "SELECT plante FROM App\Entity\Plante plante
-        //          WHERE
-
-        //             (plante.exposition IN (:exposition) OR :exposition IS NULL)
-        //             AND
-        //             (plante.besoinEau IN (:besoinEau) OR :besoinEau IS NULL) "
-        //  );
-
-
-
-        //  $query->setParameter("exposition", $filtres['exposition']);
-
-        //  $query->setParameter("besoinEau", $filtres['besoinEau']);
-        // //  $query->setParameter("lieuCultive", $filtres['lieuCultive']);
+     
 
 
         $dql = 'SELECT plante FROM App\Entity\Plante plante';
@@ -106,10 +92,33 @@ class PlanteRepository extends ServiceEntityRepository
             $query->setParameter('lieuCultive', $filtres['lieuCultive']);
         }
 
-        
-        $resultats = $query->getResult();
-        // dd($resultats);
 
+
+        $resultats = $query->getResult();
+        
+        
         return $resultats;
     }
+
+
+     // méthode propre: recherche par filtres
+     public function recherchePlante($nom)
+     {
+
+
+     $em=$this->getEntityManager();
+     $query = $em->createQuery(
+        "SELECT p FROM App\Entity\Plante p
+        WHERE p.nom LIKE :nom"
+    );
+ 
+     $query->setParameter("nom","%".$nom."%");
+     $resultat=$query->getResult();
+ 
+       
+     return $resultat;
+ 
+         
+    
+     }
 }
