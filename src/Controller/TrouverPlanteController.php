@@ -61,8 +61,6 @@ class TrouverPlanteController extends AbstractController
             return new Response($response);
         } else {
             //chercher toutes les plantes dans la base de donnees
-            $em = $doctrine->getManager();
-
             $rep = $doctrine->getRepository(Plante::class);
             $res = $rep->recherchePlanteFiltres();
             $vars = ['listePlantes' => $res, 'form' => $formulaireFiltrePlante];

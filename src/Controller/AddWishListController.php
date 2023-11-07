@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use doctrine;
 use App\Entity\Plante;
-use App\Form\FiltrePlanteType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

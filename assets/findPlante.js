@@ -54,7 +54,7 @@ function genererPlantes(arrayPlantes) {
     arrayPlantes.forEach(function (plante) {
 
         var colDiv = document.createElement('div');
-        colDiv.className = 'col-lg-4 col-md-6 pb-1';
+        colDiv.className = 'col-lg-3 col-md-4 col-ms-6 pb-1';
 
         var containerPhotoDiv = document.createElement('div');
         containerPhotoDiv.className = 'containerPhoto cat-item d-flex flex-column border mb-4';
