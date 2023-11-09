@@ -12,7 +12,7 @@ Encore
     // public path used by the web server to access the output path
     // .setPublicPath('/build')
     //dans le serveur d'interface 3
-    .setPublicPath('projet1/public/build')
+    .setPublicPath('/projet1/public/build')
     // only needed for CDN's or subdirectory deploy
     //.setManifestKeyPrefix('build/')
 
