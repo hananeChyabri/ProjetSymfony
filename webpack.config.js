@@ -26,7 +26,7 @@ Encore
 
     .addEntry('findPlante', './assets/findPlante.js')
 
-    .addEntry('formLogin', './assets/formlogin.js')
+    .addEntry('formLogin', './assets/formLogin.js')
 
     .addEntry('detaillePlante', './assets/detaillePlante.js')
 
