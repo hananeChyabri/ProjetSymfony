@@ -11,6 +11,9 @@ class PlanteFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        // $sql = file_get_contents('DataFixtures/plante.sql');
+        // $connection = $manager->getConnection();
+        // $connection->executeQuery($sql);
         $faker = Factory::create('fr_FR');
         //type de feuillage
         $nomsPlantes = ['Rose', 'Tulipe', 'Lavande', 'Orchidée', 'Lilas', 'Hortensia', 'Jonquille', 'Pivoine', 'Aloe Vera', 'Fougère', 'Bonsaï', 'Bambou'];
