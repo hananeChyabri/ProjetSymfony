@@ -26,7 +26,7 @@ APP_SECRET=0e32a2b8e5b5ee772502781db92f0347
 #
 # DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db"
 # DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=8.0.32&charset=utf8mb4"
- DATABASE_URL=" mysql://wad06:Interface3db@127.0.0.1:3306/db_wad06"=utf8mb4"
+ DATABASE_URL="mysql://wad06:Interface3db@127.0.0.1:3306/db_wad06"
 # DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=15&charset=utf8"
 ###< doctrine/doctrine-bundle ###
 
