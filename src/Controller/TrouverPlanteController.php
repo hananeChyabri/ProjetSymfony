@@ -45,9 +45,7 @@ class TrouverPlanteController extends AbstractController
                 $arrPlante['images'] = [];
                 foreach ($plante->getImages() as $image) {
                     // rajouter le nom de l'auteur à l'array
-                    $relativePath = $this->getParameter('kernel.project_dir') . str_replace('/', DIRECTORY_SEPARATOR, $image->getUrl());
-                    $relativePath = str_replace($this->getParameter('kernel.project_dir'), '', $relativePath);
-                    $arrPlante['images'][] = $relativePath;
+                    $arrPlante['images'][] = $image->getUrl();
                 }
                 // voir si la plante est dans la liste des Users
                 $arrPlante['like'] = false;
