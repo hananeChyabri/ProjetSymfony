@@ -47,7 +47,8 @@ form.addEventListener('change', function (event) {
 function genererPlantes(arrayPlantes) {
 
 
-    var container = document.querySelector('.plante'); // le conteneur de plantes
+    let container = document.querySelector('.plante'); // le conteneur de plantes
+    let urlDetailPlante = document.querySelector('.detaillePlante').dataset.route;
     container.innerHTML = "";
 
     // Parcourir la liste de plantes
@@ -70,13 +71,13 @@ function genererPlantes(arrayPlantes) {
         plante.images.forEach(function (url) {
 
             var a = document.createElement('a');
-            a.href = 'project1/public/plante/detaille/' + plante.id;
+            a.href = urlDetailPlante + plante.id;
             a.className = 'detaillePlante cat-img position-relative overflow-hidden mb-3';
 
             var img = document.createElement('img');
 
            // img.src = "/" + url;
-           img.src = "/project1/public/" + url;
+             img.src = "/project1/public/" + url;
 
             a.appendChild(img);
             photoDiv.appendChild(a);
