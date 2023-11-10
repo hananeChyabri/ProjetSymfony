@@ -51,7 +51,7 @@
 											<p>
 												{# <a class="detaillePlante waves-effect waves-light btn" href="{{ path('detaillePlante', {'id': plante.id}) }}">More</a> #}
 												<span class="waves-effect waves-light btnPrice">123  $</span>
-												<a class="favorite-button like" data-route="/plante/listSouhait/" data-id="{{ plante.id }}" id="heart">
+												<a class="favorite-button like" data-route="{{ path('addWishList') }}" data-id="{{ plante.id }}" id="heart">
 
 													{% if app.user and app.user.plantes.contains(plante) %}
 														<i class="fab fa-gratipay fa-gratipay-like"></i>
