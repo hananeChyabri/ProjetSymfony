@@ -281,21 +281,20 @@ bouton_favorits.addEventListener('click', function (event) {
 
 
 
-let bouton_recherche = document.querySelector('#recherchePlante');
-bouton_recherche.addEventListener("click", RecherchePlante);
+let inputRecherche = document.querySelector('.inputRecherche');
+inputRecherche.addEventListener("input", RecherchePlante);
     function RecherchePlante(event) {
         event.preventDefault();
-      
+   
    
    
         let formLike = new FormData();
-        //recuperer le champs de recherche
-        let inputRecherche = document.querySelector(".inputRecherche").value;
+       
 
-        formLike.append("nom", inputRecherche);
+        formLike.append("nom", inputRecherche.value);
 
 
-        axios.post(event.target.parentElement.dataset.route, formLike, {
+        axios.post(inputRecherche.dataset.route, formLike, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             },

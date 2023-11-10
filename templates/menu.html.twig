@@ -9,15 +9,15 @@
 			</a>
 		</div>
 		<div class="col-lg-6 col-6 text-left">
-			<form action="" id="recherche_plante_form" data-route="/plante/recherche_plante">
+			<form action="" id="recherche_plante_form" >
 
                     <div class="input-group">
-                        <input type="text" class="form-control inputRecherche" placeholder="Search for plante">
+                        <input type="text" class="form-control inputRecherche" data-route="{{ path('recherchePlante') }}" placeholder="recherche par nom ">
                         
 						<div class="input-group-append">
 						
                             <span class="input-group-text bg-transparent text-primary">
-                               <a id="recherchePlante" data-route="/plante/recherche_plante" href=""> <i class="fa fa-search"></i>
+                               <a id="recherchePlante"  href=""> <i class="fa fa-search"></i>
                            </a> </span>
                         </div>
 						
