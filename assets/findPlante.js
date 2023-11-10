@@ -1,12 +1,9 @@
 import './styles/findPlante.css';
 
-
-
-
-
 // Axiox pour filtrer les plantes
 // on obtient le formulaire pour
 const form = document.getElementById('filtre-form-plante');
+const urlDetailPlante = document.querySelector('.detaillePlante').dataset.route;
 
 // on detectera tous les inputs du form, peu importe quel fitre on change
 form.addEventListener('change', function (event) {
@@ -48,7 +45,7 @@ function genererPlantes(arrayPlantes) {
 
 
     let container = document.querySelector('.plante'); // le conteneur de plantes
-    let urlDetailPlante = document.querySelector('.detaillePlante').dataset.route;
+  
     container.innerHTML = "";
 
     // Parcourir la liste de plantes
