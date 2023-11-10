@@ -4,6 +4,7 @@ import './styles/findPlante.css';
 // on obtient le formulaire pour
 const form = document.getElementById('filtre-form-plante');
 const urlDetailPlante = document.querySelector('.detaillePlante').dataset.route;
+const urlAddFavorit = document.querySelector('.favorite-button').dataset.route;
 
 // on detectera tous les inputs du form, peu importe quel fitre on change
 form.addEventListener('change', function (event) {
@@ -119,7 +120,7 @@ function genererPlantes(arrayPlantes) {
         let favoriteButtonLink = document.createElement('a');
         favoriteButtonLink.className = 'favorite-button like'
 
-        favoriteButtonLink.setAttribute('data-route', '/plante/listSouhait/');
+        favoriteButtonLink.setAttribute('data-route', urlAddFavorit);
         favoriteButtonLink.setAttribute('data-id', plante.id);
         favoriteButtonLink.id = 'heart';
 
