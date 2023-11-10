@@ -71,7 +71,7 @@ function genererPlantes(arrayPlantes) {
         plante.images.forEach(function (url) {
 
             var a = document.createElement('a');
-            a.href = urlDetailPlante + plante.id;
+            a.href = urlDetailPlante.substring(0, urlDetailPlante.length - 1) + plante.id;
             a.className = 'detaillePlante cat-img position-relative overflow-hidden mb-3';
 
             var img = document.createElement('img');

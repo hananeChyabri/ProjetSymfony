@@ -29,7 +29,7 @@
 									<div class="cardcontainer">
 										<div class="photo">
 											{% for image in plante.images %}
-												<a href="{{ path('detaillePlante', {'id': plante.id}) }}" class="detaillePlante cat-img position-relative overflow-hidden mb-3" data-id="{{ plante.id }}" data-route="/plante/detaille/">
+												<a href="{{ path('detaillePlante', {'id': plante.id}) }}" class="detaillePlante cat-img position-relative overflow-hidden mb-3" data-id="{{ plante.id }}" data-route="{{ path('detaillePlante', {'id':0}) }}">
 													<img src="{{ asset(image.url) }}">
 												</a>
 											{% endfor %}
