@@ -10,9 +10,9 @@ Encore
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
     // public path used by the web server to access the output path
-     .setPublicPath('/build')
+    //.setPublicPath('/build')
     //dans le serveur d'interface 3
-    //.setPublicPath('/project1/public/build')
+    .setPublicPath('/project1/public/build')
     // only needed for CDN's or subdirectory deploy
     //.setManifestKeyPrefix('build/')
 
@@ -30,9 +30,9 @@ Encore
 
     .addEntry('detaillePlante', './assets/detaillePlante.js')
 
-   
 
-  
+
+
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 

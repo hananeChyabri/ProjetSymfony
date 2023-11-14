@@ -46,7 +46,7 @@ function genererPlantes(arrayPlantes) {
 
 
     let container = document.querySelector('.plante'); // le conteneur de plantes
-  
+
     container.innerHTML = "";
 
     // Parcourir la liste de plantes
@@ -74,8 +74,8 @@ function genererPlantes(arrayPlantes) {
 
             var img = document.createElement('img');
 
-            img.src = "/" + url;
-           //  img.src = "/project1/public/" + url;
+            // img.src = "/" + url;
+            img.src = "/project1/public/" + url;
 
             a.appendChild(img);
             photoDiv.appendChild(a);
@@ -277,44 +277,44 @@ bouton_favorits.addEventListener('click', function (event) {
 });
 
 
-/* axiox pour la recherche*/ 
+/* axiox pour la recherche*/
 
 
 
 let inputRecherche = document.querySelector('.inputRecherche');
 inputRecherche.addEventListener("input", RecherchePlante);
-    function RecherchePlante(event) {
-        event.preventDefault();
-   
-   
-   
-        let formLike = new FormData();
-       
-
-        formLike.append("nom", inputRecherche.value);
+function RecherchePlante(event) {
+    event.preventDefault();
 
 
-        axios.post(inputRecherche.dataset.route, formLike, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-        }).then(function (response) { // Gérez la réponse du serveur (par exemple, actualisez l'interface utilisateur)
 
-       // parcourir l'array d'objets reçu (car le JSON a été déjà parsé par AXIOS)
-       let arrayPlantes = response.data;
-
-       genererPlantes(arrayPlantes);
-           
-
-        }).catch(function (error) {
-
-            if (error.response) {
-             
-                    alert(error.response.data.message);
-                
-            }
-
-        });
+    let formLike = new FormData();
 
 
-    }
+    formLike.append("nom", inputRecherche.value);
+
+
+    axios.post(inputRecherche.dataset.route, formLike, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+    }).then(function (response) { // Gérez la réponse du serveur (par exemple, actualisez l'interface utilisateur)
+
+        // parcourir l'array d'objets reçu (car le JSON a été déjà parsé par AXIOS)
+        let arrayPlantes = response.data;
+
+        genererPlantes(arrayPlantes);
+
+
+    }).catch(function (error) {
+
+        if (error.response) {
+
+            alert(error.response.data.message);
+
+        }
+
+    });
+
+
+}
