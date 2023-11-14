@@ -272,6 +272,21 @@ body {
 }
 
 
+/*About Css*/
+
+.containerAbout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Cela permet de centrer verticalement sur toute la hauteur de la vue (viewport) */
+}
+
+.centrerAbout {
+  text-align: center; /* Pour centrer le texte à l'intérieur de cet élément */
+  border: 1px solid #ccc; /* Juste pour montrer la zone du contenu centré */
+  padding: 20px;
+}
+
 
 
 

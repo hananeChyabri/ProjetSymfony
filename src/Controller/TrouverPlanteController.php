@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 
 class TrouverPlanteController extends AbstractController
 {
@@ -16,7 +17,7 @@ class TrouverPlanteController extends AbstractController
     // Action qui affiche toutes les plantes
 
     #[Route('/plante/trouver_une_plante', name: 'maPlante')]
-    public function RecherchePlantes(Request $req, ManagerRegistry $doctrine, SerializerInterface $serializer): Response
+    public function RecherchePlantes(PaginatorInterface $paginator , Request $req, ManagerRegistry $doctrine, SerializerInterface $serializer): Response
 
     {
 
@@ -25,6 +26,7 @@ class TrouverPlanteController extends AbstractController
         $formulaireFiltrePlante->handleRequest($req);
 
         $user = $this->getUser();
+        $numeroPage = $req->query->getInt('page', 1); 
 
         if ($formulaireFiltrePlante->isSubmitted() && $formulaireFiltrePlante->isValid()) {
 
@@ -55,16 +57,31 @@ class TrouverPlanteController extends AbstractController
 
 
                 $plantes[] = $arrPlante;
+                $paginationPlante = $paginator->paginate(
+                    $plantes,
+                        $numeroPage,
+                        5 // résultats affichés par page
+                    );
 
             }
-            $response = $serializer->serialize($plantes, 'json');
+            $response = $serializer->serialize($paginationPlante, 'json');
             return new Response($response);
         } else {
             //chercher toutes les plantes dans la base de donnees
             $rep = $doctrine->getRepository(Plante::class);
-            $res = $rep->recherchePlanteFiltres();
-            $vars = ['listePlantes' => $res, 'form' => $formulaireFiltrePlante];
+            $resultatsPlantes = $rep->recherchePlanteFiltres();
+          
+        
+            $paginationPlante = $paginator->paginate(
+            $resultatsPlantes,
+                $numeroPage,
+                6 // résultats affichés par page
+            );
+            $vars = ['listePlantes' => $paginationPlante, 'form' => $formulaireFiltrePlante];
         }
-        return $this->render('plante/trouver_une_plante2.html.twig', $vars);
+    
+   
+
+        return $this->render('plante/trouver_une_plante.html.twig', $vars);
     }
 }

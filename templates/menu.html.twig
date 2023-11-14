@@ -70,11 +70,11 @@
 				</li>
 				{% if not app.user %}
 				<li>
-					<a class="nav-link scrollto" href="{{ path('app_login') }}">login</a>
+					<a class="nav-link scrollto" href="{{ path('app_login') }}">connexion</a>
 				</li>
 				{% else %}
 					<li>
-						<a href="{{path('app_logout')}}">Logout</a>
+						<a href="{{path('app_logout')}}">déconnexion</a>
 					</li>
 				{% endif %}
 			</ul>
