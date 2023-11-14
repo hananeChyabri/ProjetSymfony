@@ -24,6 +24,14 @@ class ImageFixtures extends Fixture implements DependentFixtureInterface
             // $image->setPlante($Plantes[mt_rand(0, count($Plantes) - 1)]);
             $image->setPlante($Plantes[$i]);
             $manager->persist($image);
+            $image = new Image();
+            $image->setUrl("images/plante" . $i + 11 . ".jpg");
+            $image->setPlante($Plantes[$i]);
+            $manager->persist($image);
+            $image = new Image();
+            $image->setUrl("images/plante" . $i + 21 . ".jpg");
+            $image->setPlante($Plantes[$i]);
+            $manager->persist($image);
         }
         $manager->flush();
     }

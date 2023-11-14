@@ -73,7 +73,7 @@ class Plante
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $croissance = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: "text" , nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -104,7 +104,7 @@ class Plante
     public function __construct(array $init = [])
     {
         $this->hydrate($init);
-        $this->PlantesProfil = new ArrayCollection();
+        //$this->PlantesProfil = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->relation = new ArrayCollection();
     }

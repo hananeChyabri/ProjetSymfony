@@ -46,6 +46,7 @@
   overflow: hidden;
   width: 187px;
   height: 37px;
+  margin-top: 7%;
 
   }
   
@@ -95,7 +96,7 @@
 .nomPlante {
   width: 90px;
   height: 30px;
-  background-color: #E74C3C;
+  background-color: #5CB874;
   color: white;
   position: relative;
   top: -30px;

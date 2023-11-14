@@ -64,9 +64,8 @@ function genererPlantes(arrayPlantes) {
         var photoDiv = document.createElement('div');
         photoDiv.className = 'photo';
 
-        // Parcourir les images de la plante
-
-        plante.images.forEach(function (url) {
+        // Afficher la premiere image de la plante
+        //plante.images.forEach(function (url) {
 
             var a = document.createElement('a');
             a.href = urlDetailPlante.substring(0, urlDetailPlante.length - 1) + plante.id;
@@ -74,12 +73,12 @@ function genererPlantes(arrayPlantes) {
 
             var img = document.createElement('img');
 
-            // img.src = "/" + url;
-            img.src = "/project1/public/" + url;
+            // img.src = "/" + plante.images[0];
+            img.src = "/project1/public/" + plante.images[0];
 
             a.appendChild(img);
             photoDiv.appendChild(a);
-        });
+        //});
 
         var photosDiv = document.createElement('div');
         photosDiv.className = 'nomPlante';

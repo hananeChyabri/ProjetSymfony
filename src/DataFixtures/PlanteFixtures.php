@@ -16,9 +16,9 @@ class PlanteFixtures extends Fixture
         // $connection->executeQuery($sql);
         $faker = Factory::create('fr_FR');
         //type de feuillage
-        $nomsPlantes = ['Rose', 'Tulipe', 'Lavande', 'Orchidée', 'Lilas', 'Hortensia', 'Jonquille', 'Pivoine', 'Aloe Vera', 'Fougère', 'Bonsaï', 'Bambou'];
+        $nomsPlantes = ['Rose', 'Tulipe', 'Lavande', 'Orchidée', 'Lilas', 'Hortensia', 'Monstera deliciosa', 'Pivoine', 'Aloe Vera', 'Fougère', 'Bonsaï', 'Bambou'];
         $typeFeuillage = array("Persistant", "Caduc");
-        $familleBotanique = array("Rosacées", "Liliacées", "Asteracées ou Composées", "Poacées ou Graminées", "Fabacées ou Légumineuses", "Solanacées", "Orchidacées", "Ericacées", "Cactacées", "Lauracées", "Poacées ou Orchidées", "Cucurbitacées", "Ranunculacées");
+        $familleBotanique = array("Rosacées", "Liliacées", "Orchidacées", "Oléacées", "Fabacées ou Légumineuses", "Solanacées", "Orchidacées", "Ericacées", "Cactacées", "Lauracées", "Poacées ou Orchidées", "Cucurbitacées", "Ranunculacées");
         $typePlante = array("Arbre", "Arbuste", "Plante ornementale", "Fruit", "Légume", "Aromatique", "Médicinale", "Plante de bassin");
         $lieuCultive = array("Intérieur", "Balcon ou terrasse", "Jardin", "Potager ou verger");
         $climat = array("Océanique", "Semi-océanique", "Montagnard", "Méditerranéen", "Continental");
@@ -34,7 +34,7 @@ class PlanteFixtures extends Fixture
         for ($i = 0; $i < 11; $i++) {
             $plante = new Plante(
                 [
-                    'nom' => $nomsPlantes[mt_rand(0, count($nomsPlantes) - 1)],
+                    'nom' => $nomsPlantes[$i],
                     'familleBotanique' => $familleBotanique[mt_rand(0, count($familleBotanique) - 1)],
                     'origin' => $faker->country(),
                     'typeDeFeuillage' => $typeFeuillage[mt_rand(0, count($typeFeuillage) - 1)],
@@ -53,7 +53,9 @@ class PlanteFixtures extends Fixture
                     'humiditeSol' => $humiditeSol[mt_rand(0, count($humiditeSol) - 1)],
                     'phSol' => $phSol[mt_rand(0, count($phSol) - 1)],
                     'croissance' => $croissance[mt_rand(0, count($croissance) - 1)],
-                    'description' => $faker->sentence(10),
+                    'description' => "Une plante à l'allure très tendance et qui prendra une place prépondérante dans votre intérieur avec ses grandes feuilles. La plante était particulièrement populaire dans les années 70. Elle nous revient en force. 
+
+                    La plante est originaire d'Amérique du Sud et Centrale où elle peut grimper à des mètres de hauteur dans les arbres grâce à ses lianes. Ses feuilles peuvent quant à elles atteindre jusqu'à un mètre de large! C'est plutôt impressionnant si vous pouvez l'observer de vos yeux. La plante porte aussi de longs fruits avec une saveur tropicale unique. Une véritable explosion de saveur en bouche! Il est dommage que ces fruits soient absents sur la plante d'intérieur. J'aurais bien voulu y goûter moi-même...  ",
                     'typePlante' => $typePlante[mt_rand(0, count($typePlante) - 1)],
 
 
