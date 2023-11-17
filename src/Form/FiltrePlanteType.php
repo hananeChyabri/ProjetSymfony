@@ -66,10 +66,11 @@ class FiltrePlanteType extends AbstractType
 
         ->add('couleur', ChoiceType::class, [
             'choices' => [
-                'Cyan' => 'Cyan',
-                'Vert d eau' => 'Vert d eau',
-                'Vert lichen' => 'Vert lichen',
-                'Orchidée' => 'Orchidée',
+                'Rose' => 'Rose',
+                'Multicolore' => 'Multicolore',
+                'Mauve' => 'Mauve',
+                'Verte' => 'Verte',
+                'Rouge' => 'Rouge',
                 
             ],
             'multiple' => true, // Autorise la sélection de plusieurs options

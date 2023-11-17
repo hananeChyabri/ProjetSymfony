@@ -57,14 +57,14 @@ class TrouverPlanteController extends AbstractController
 
 
                 $plantes[] = $arrPlante;
-                $paginationPlante = $paginator->paginate(
-                    $plantes,
-                        $numeroPage,
-                        5 // résultats affichés par page
-                    );
+                // $paginationPlante = $paginator->paginate(
+                //     $plantes,
+                //         $numeroPage,
+                //         5 // résultats affichés par page
+                //     );
 
             }
-            $response = $serializer->serialize($paginationPlante, 'json');
+            $response = $serializer->serialize($plantes, 'json');
             return new Response($response);
         } else {
             //chercher toutes les plantes dans la base de donnees

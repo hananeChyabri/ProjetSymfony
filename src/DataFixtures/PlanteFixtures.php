@@ -17,6 +17,7 @@ class PlanteFixtures extends Fixture
         $faker = Factory::create('fr_FR');
         //type de feuillage
         $nomsPlantes = ['Rose', 'Tulipe', 'Lavande', 'Orchidée', 'Lilas', 'Hortensia', 'Monstera deliciosa', 'Pivoine', 'Aloe Vera', 'Fougère', 'Bonsaï', 'Bambou'];
+        $couleurPlantes = ['Rose', 'Multicolore', 'Mauve', 'Blanche', 'Mauve', 'Rose', 'Verte', 'Verte', 'Verte', 'Rouge', 'Blanche', 'Verte'];
         $typeFeuillage = array("Persistant", "Caduc");
         $familleBotanique = array("Rosacées", "Liliacées", "Orchidacées", "Oléacées", "Fabacées ou Légumineuses", "Solanacées", "Orchidacées", "Ericacées", "Cactacées", "Lauracées", "Poacées ou Orchidées", "Cucurbitacées", "Ranunculacées");
         $typePlante = array("Arbre", "Arbuste", "Plante ornementale", "Fruit", "Légume", "Aromatique", "Médicinale", "Plante de bassin");
@@ -43,7 +44,7 @@ class PlanteFixtures extends Fixture
                     'periodeFloraison' => $faker->month,
                     'utilisation' => "decoration",
                     'lieuCultive' => $lieuCultive[mt_rand(0, count($lieuCultive) - 1)],
-                    'couleurFleur' => $faker->colorName(),
+                    'couleurFleur' => $couleurPlantes[$i],
                     'climat' => $climat[mt_rand(0, count($climat) - 1)],
                     'exposition' => $exposition[mt_rand(0, count($exposition) - 1)],
                     'besoinEau' => $besoinEau[mt_rand(0, count($besoinEau) - 1)],
