@@ -64,9 +64,9 @@
   width: 100%;
 }
 
-.cardcontainer:hover {
+/* .cardcontainer:hover {
   box-shadow: 0 0 45px gray;
-}
+} */
 
 .photo {
   height: 300px;
@@ -123,7 +123,7 @@
   top: 10px;
 }
 
-.cardcontainer:hover>.photo {
+/* .cardcontainer:hover>.photo {
   height: 200px;
   animation: move1 0.5s ease both;
 }
@@ -139,8 +139,8 @@
 }
 
 .cardcontainer:hover>.content {
-  height: 160px;
-}
+  height: 160px; 
+}*/
 
 .footer {
   width: 80%;
