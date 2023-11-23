@@ -64,8 +64,8 @@ function genererPlantes(arrayPlantes) {
 
             var img = document.createElement('img');
 
-           // img.src = "/" + plante.images[0];
-            img.src = "/project1/public/" + plante.images[0];
+            img.src = "/" + plante.images[0];
+           // img.src = "/project1/public/" + plante.images[0];
 
             a.appendChild(img);
             photoDiv.appendChild(a);
