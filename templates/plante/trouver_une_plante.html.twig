@@ -10,81 +10,78 @@
 
 
 	{% include 'filtre.html.twig' %}
-	<div
-		class="col-lg-9">
+	<div class="col-lg-9">
 		<!-- Categories Start -->
-		<div class="container-fluid">
-			<div class="row plante">
+		{# <div class="container-fluid"> #}
+			<div class="plante flex-container_plante"> {% for plante in listePlantes %}
 
 
-				{% for plante in listePlantes %}
+				{# <div class="col-lg-3 col-md-4 col-ms-6 pb-1">
+								
+								
+														<div class="containerPhoto cat-item d-flex flex-column border mb-4"> #}
+				{# <div class="flex-container_plante"> #}
 
 
-					<div class="col-lg-3 col-md-4 col-ms-6 pb-1">
-
-
-						<div class="containerPhoto cat-item d-flex flex-column border mb-4">
-
-							<div class="cardcontainer">
-								<div
-									class="photo">
-									{# {% for image in plante.images %}
-																												<a href="{{ path('detaillePlante', {'id': plante.id}) }}" class="detaillePlante cat-img position-relative overflow-hidden mb-3" data-id="{{ plante.id }}" data-route="{{ path('detaillePlante', {'id':0}) }}">
-																													<img src="{{ asset(image.url) }}">
-																												</a>
-																											{% endfor %} #}
-									<a href="{{ path('detaillePlante', {'id': plante.id}) }}" class="detaillePlante cat-img position-relative overflow-hidden mb-3" data-id="{{ plante.id }}" data-route="{{ path('detaillePlante', {'id':0}) }}">
-										<img src="{{ asset(plante.images[0].url) }}"></a>
-									<div class="nomPlante">{{ plante.nom }}</div>
-								</div>
-								<div class="content">
-									<p class="txt4">exposition :
-										{{plante.exposition}}</p>
-									<p class="txt4">besoin Eau :
-										{{plante.besoinEau}}</p>
-									<p class="txt4">niveau Soin :
-										{{plante.niveauSoin}}</p>
-									<p class="txt4">Lieu :
-										{{plante.lieuCultive}}</p>
-
-
-								</div>
-								<div class="footer">
-									<p>
-										{# <a class="detaillePlante waves-effect waves-light btn" href="{{ path('detaillePlante', {'id': plante.id}) }}">More</a> #}
-										<span class="waves-effect waves-light btnPrice">123  $</span>
-										<a class="favorite-button like" data-route="{{ path('addWishList') }}" data-id="{{ plante.id }}" id="heart">
-
-											{% if app.user and app.user.plantes.contains(plante) %}
-												<i class="fab fa-gratipay fa-gratipay-like"></i>
-											{% else %}
-												<i class="fab fa-gratipay"></i>
-											{% endif %}
-
-										</a>
-									</p>
-									<p>
-
-
-										<button class="btnAddCart">Acheter
-											<i class="fas fa-shopping-cart text-primary"></i>
-										</button>
-
-
-									</p>
-								</div>
-							</div>
-						</div>
+					<div class="cardcontainer border mb-4"> <div
+						class="photo">
+						{# {% for image in plante.images %}
+																																								<a href="{{ path('detaillePlante', {'id': plante.id}) }}" class="detaillePlante cat-img position-relative overflow-hidden mb-3" data-id="{{ plante.id }}" data-route="{{ path('detaillePlante', {'id':0}) }}">
+																																									<img src="{{ asset(image.url) }}">
+																																								</a>
+																																							{% endfor %} #}
+						<a href="{{ path('detaillePlante', {'id': plante.id}) }}" class="detaillePlante cat-img position-relative overflow-hidden mb-3" data-id="{{ plante.id }}" data-route="{{ path('detaillePlante', {'id':0}) }}">
+							<img src="{{ asset(plante.images[0].url) }}"></a>
+						<div class="nomPlante">{{ plante.nom }}</div>
 					</div>
-				{% endfor %}
+					<div class="content">
+						<p class="txt4">exposition :
+							{{plante.exposition}}</p>
+						<p class="txt4">besoin Eau :
+							{{plante.besoinEau}}</p>
+						<p class="txt4">niveau Soin :
+							{{plante.niveauSoin}}</p>
+						<p class="txt4">Lieu :
+							{{plante.lieuCultive}}</p>
 
-				{# inclusion de la pagination  #}
-				<div class="paginationPlante">
-					{{ knp_pagination_render (listePlantes) }}
+
+					</div>
+					<div class="footer">
+						<p>
+							{# <a class="detaillePlante waves-effect waves-light btn" href="{{ path('detaillePlante', {'id': plante.id}) }}">More</a> #}
+							<span class="waves-effect waves-light btnPrice">123  $</span>
+							<a class="favorite-button like" data-route="{{ path('addWishList') }}" data-id="{{ plante.id }}" id="heart">
+
+								{% if app.user and app.user.plantes.contains(plante) %}
+									<i class="fab fa-gratipay fa-gratipay-like"></i>
+								{% else %}
+									<i class="fab fa-gratipay"></i>
+								{% endif %}
+
+							</a>
+						</p>
+						<p>
+
+
+							<button class="btnAddCart">Acheter
+								<i class="fas fa-shopping-cart text-primary"></i>
+							</button>
+
+
+						</p>
+					</div>
 				</div>
-			</div>
-
+				{# </div> #}
+				{# </div> #}
+			{% endfor %}
 		</div>
+		{# inclusion de la pagination  #}
+		<div class="paginationPlante">
+			{{ knp_pagination_render (listePlantes) }}
+		</div>
+
+
+		{# </div> #}
 
 	</div>
 

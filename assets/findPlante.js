@@ -52,29 +52,20 @@ function genererPlantes(arrayPlantes) {
     // Parcourir la liste de plantes
     arrayPlantes.forEach(function (plante) {
 
-        var colDiv = document.createElement('div');
-        colDiv.className = 'col-lg-3 col-md-4 col-ms-6 pb-1';
 
-        var containerPhotoDiv = document.createElement('div');
-        containerPhotoDiv.className = 'containerPhoto cat-item d-flex flex-column border mb-4';
-
-        var cardcontainerDiv = document.createElement('div');
-        cardcontainerDiv.className = 'cardcontainer';
+        let cardcontainerDiv = document.createElement('div');
+        cardcontainerDiv.className = 'cardcontainer border mb-4';
 
         var photoDiv = document.createElement('div');
         photoDiv.className = 'photo';
-
-        // Afficher la premiere image de la plante
-        //plante.images.forEach(function (url) {
-
             var a = document.createElement('a');
             a.href = urlDetailPlante.substring(0, urlDetailPlante.length - 1) + plante.id;
             a.className = 'detaillePlante cat-img position-relative overflow-hidden mb-3';
 
             var img = document.createElement('img');
 
-           // img.src = "/" + plante.images[0];
-            img.src = "/project1/public/" + plante.images[0];
+            img.src = "/" + plante.images[0];
+           // img.src = "/project1/public/" + plante.images[0];
 
             a.appendChild(img);
             photoDiv.appendChild(a);
@@ -162,15 +153,7 @@ function genererPlantes(arrayPlantes) {
         cardcontainerDiv.appendChild(photoDiv);
         cardcontainerDiv.appendChild(contentDiv);
         cardcontainerDiv.appendChild(footerDiv);
-
-        containerPhotoDiv.appendChild(cardcontainerDiv);
-        photoDiv.appendChild(photosDiv);
-        //containerPhotoDiv.appendChild(photosDiv);
-
-        colDiv.appendChild(containerPhotoDiv);
-
-        // Ajoutez le nouvel élément à votre conteneur
-        container.appendChild(colDiv);
+        container.appendChild(cardcontainerDiv);
 
     });
 }
