@@ -27,9 +27,6 @@
 }
 
 .btnAddCart {
-  position: relative;
-  z-index: 1;
-  display: inline-block;
   font-size: 12px;
   font-weight: 900;
   text-transform: uppercase;
@@ -39,14 +36,9 @@
   border: 1px solid #5cb874;
   border-radius: 20px;
   overflow: hidden;
-  background: none;
-  outline: none;
-  border: 1px solid #5cb874;
-  border-radius: 20px;
-  overflow: hidden;
   width: 187px;
-  height: 37px;
-  margin-top: 7%;
+  height: 33px;
+  margin-top: 4%;
 
   }
   
@@ -111,18 +103,8 @@
   top: 37px;
 }
 
-.txt5 {
-  position: relative;
-  top: 18px;
-  color: #E74C3C;
-  font-size: 23px;
-}
 
-.txt2 {
 
-  position: relative;
-  top: 10px;
-}
 
 .footer {
   width: 80%;
@@ -165,12 +147,7 @@
   color: #E74C3C;
 }
 
-.txt3 {
-  color: gray;
-  position: relative;
-  top: 18px;
-  font-size: 14px;
-}
+
 
   .paginationPlante {
     display: inline-block;

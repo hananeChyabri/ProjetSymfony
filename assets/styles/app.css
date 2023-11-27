@@ -10,7 +10,6 @@ body {
   }
 
   .badge {
- 
     color: #865050;
   }
   
@@ -23,23 +22,6 @@ body {
   .input-group-prepend,
   .input-group-append {
     display: flex;
-  }
-  
-  .nav {
-    display: flex;
-    flex-wrap: wrap;
-    padding-left: 0;
-    margin-bottom: 0;
-    list-style: none;
-  }
-  
-  .navbar {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 1rem;
   }
   
   .text-left {
@@ -72,13 +54,6 @@ body {
     color: #5cb874;
 }
 
-
-/*--------------------------------------------------------------
-# Navigation Menu
---------------------------------------------------------------*/
-/**
-* Desktop Navigation 
-*/
 .navbar {
     padding: 0;
 }
