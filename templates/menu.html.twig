@@ -1,87 +1,88 @@
 <!-- Topbar Start -->
-<div class="container__Menu">
+<div
+	class="container__Menu">
 
 	{# <div class="row align-items-center py-3 px-xl-5"> #}
-		<div class="">
-			<a class="text-decoration-none" href="{{ path('maPlante') }}">
-				<h1>
-					<span>E</span>plante</h1>
-			</a>
-		</div>
-		<div class="Menu__recherche">
-			<form action="" id="recherche_plante_form" >
-
-                    <div class="input__recherche">
-                        <input type="text" class="inputRecherche" data-route="{{ path('recherchePlante') }}" placeholder="recherche par nom ">
-                        
-						<div class="input-icon_recherche">
-						
-                            <span>
-                               <a id="recherchePlante"  href=""> <i class="fa fa-search"></i>
-                           </a> </span>
-                        </div>
-						
-                    </div>
-				</form>
-
-		</div>
-		<div>
-
-			<a id="favorite_list_button" data-route="{{ path('showWishList') }}" href="" class="btn__Favorit">
-				<i class="fas fa-heart"></i>
-				<span id="favorite_list" class="badge">
-					{% if app.user %}
-						{{app.user.plantes.count}}
-						{% else %}0
-					{% endif %}
-				</span>
-			</a>
-			<a href="" class="btn__Favorit">
-				<i class="fas fa-shopping-cart"></i>
-				<span class="badge">0</span>
-			</a>
-		</div>
+	<div class="">
+		<a class="text-decoration-none" href="{{ path('maPlante') }}">
+			<h1>
+				<span>E</span>plante</h1>
+		</a>
 	</div>
-</div>
-<!-- Topbar End -->
+	<div class="Menu__recherche">
+		<form action="" id="recherche_plante_form">
+
+			<div class="input__recherche">
+				<input type="text" class="inputRecherche" data-route="{{ path('recherchePlante') }}" placeholder="recherche par nom ">
+
+				<div class="input-icon_recherche">
+
+					<span>
+						<a id="recherchePlante" href="">
+							<i class="fa fa-search"></i>
+						</a>
+					</span>
+				</div>
+
+			</div>
+		</form>
+
+	</div>
+	<div>
+
+		<a id="favorite_list_button" data-route="{{ path('showWishList') }}" href="" class="btn__Favorit">
+			<i class="fas fa-heart"></i>
+			<span id="favorite_list" class="badge">
+				{% if app.user %}
+					{{app.user.plantes.count}}
+					{% else %}0
+				{% endif %}
+			</span>
+		</a>
+		<a id="panier_list_button" href="{{ path('panier_afficher') }}" href="" class="btn__Favorit">
+			<i class="fas fa-shopping-cart"></i>
+			<span id="panier_list" class="badge">
+				{% if app.session.get('panierCommande') is not null %}
+			
+					{{ app.session.get('panierCommande').getDetails() | length}}
+				{% else %}
+					0
+				{% endif %}
+			</span>
+		</a>
+	</div>
+</div></div><!-- Topbar End --><!-- ======= Header ======= --><header id="header">
+<div class="container">
 
 
-<!-- ======= Header ======= -->
-<header id="header">
-	<div class="container">
+	<nav id="navbar" class="navbar">
+		<ul>
+			<li>
+				<a class="nav-link scrollto" href="{{ path('maPlante') }}">Home</a>
+			</li>
+			<li>
+				<a class="nav-link scrollto active" href="{{ path('app_home') }}">About</a>
+			</li>
+			<li>
+				<a class="nav-link scrollto" href="{{ path('maPlante') }}">Trouver une plante</a>
+			</li>
 
-
-
-			<nav id="navbar" class="navbar"> <ul>
-				<li>
-					<a class="nav-link scrollto" href="{{ path('maPlante') }}">Home</a>
-				</li>
-				<li>
-					<a class="nav-link scrollto active" href="{{ path('app_home') }}">About</a>
-				</li>
-				<li>
-					<a class="nav-link scrollto" href="{{ path('maPlante') }}">Trouver une plante</a>
-				</li>
-
-				<li>
-					<a class="nav-link scrollto" href="{{ path('app_register') }}">Inscription</a>
-				</li>
-				{% if not app.user %}
+			<li>
+				<a class="nav-link scrollto" href="{{ path('app_register') }}">Inscription</a>
+			</li>
+			{% if not app.user %}
 				<li>
 					<a class="nav-link scrollto" href="{{ path('app_login') }}">connexion</a>
 				</li>
-				{% else %}
-					<li>
-						<a href="{{path('app_logout')}}">déconnexion</a>
-					</li>
-				{% endif %}
-			</ul>
+			{% else %}
+				<li>
+					<a href="{{path('app_logout')}}">déconnexion</a>
+				</li>
+			{% endif %}
+		</ul>
 
 
-		</li>
+	</li>
 
 
-	</ul>
-	
-</nav>
-<!-- .navbar --></div></header><!-- End Header -->
+</ul></nav><!-- .navbar --></div></header><!-- End Header -->

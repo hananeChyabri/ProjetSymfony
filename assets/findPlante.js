@@ -58,17 +58,17 @@ function genererPlantes(arrayPlantes) {
 
         var photoDiv = document.createElement('div');
         photoDiv.className = 'photo';
-            var a = document.createElement('a');
-            a.href = urlDetailPlante.substring(0, urlDetailPlante.length - 1) + plante.id;
-            a.className = 'detaillePlante cat-img position-relative overflow-hidden mb-3';
+        var a = document.createElement('a');
+        a.href = urlDetailPlante.substring(0, urlDetailPlante.length - 1) + plante.id;
+        a.className = 'detaillePlante cat-img position-relative overflow-hidden mb-3';
 
-            var img = document.createElement('img');
+        var img = document.createElement('img');
 
-            //img.src = "/" + plante.images[0];
-            img.src = "/project1/public/" + plante.images[0];
+        img.src = "/" + plante.images[0];
+        // img.src = "/project1/public/" + plante.images[0];
 
-            a.appendChild(img);
-            photoDiv.appendChild(a);
+        a.appendChild(img);
+        photoDiv.appendChild(a);
         //});
 
         var photosDiv = document.createElement('div');
@@ -159,7 +159,7 @@ function genererPlantes(arrayPlantes) {
 }
 
 // Axios pour ajouter au liste de souhait
-let boutons = document.querySelectorAll('.favorite-button');
+const boutons = document.querySelectorAll('.favorite-button');
 // Parcourez la liste des boutons et ajoutez un écouteur d'événements à chacun
 boutons.forEach(function (bouton) {
     bouton.addEventListener("click", AjouterListFavoris);
@@ -215,17 +215,7 @@ function AjouterListFavoris(event) {
 
 }
 
-
-
-
-
-
-
-
-
 /*Axios pour afficher les plantes favories*/
-
-
 let bouton_favorits = document.getElementById('favorite_list_button');
 bouton_favorits.addEventListener('click', function (event) {
     event.preventDefault();
@@ -260,22 +250,12 @@ bouton_favorits.addEventListener('click', function (event) {
 
 
 /* axiox pour la recherche*/
-
-
-
 let inputRecherche = document.querySelector('.inputRecherche');
 inputRecherche.addEventListener("input", RecherchePlante);
 function RecherchePlante(event) {
     event.preventDefault();
-
-
-
     let formLike = new FormData();
-
-
     formLike.append("nom", inputRecherche.value);
-
-
     axios.post(inputRecherche.dataset.route, formLike, {
         headers: {
             'Content-Type': 'multipart/form-data'
@@ -300,3 +280,51 @@ function RecherchePlante(event) {
 
 
 }
+
+
+/* Ajouter au panier */
+let btnsAddCart = document.querySelectorAll('.btnAddCart');
+btnsAddCart.forEach(function (bouton) {
+    bouton.addEventListener("click", AjouterPanier);
+});
+function AjouterPanier(event) {
+   
+    event.preventDefault();
+    let paniers = document.getElementById("panier_list");
+
+    const planteId = event.target.dataset.id;
+
+    // on prend la route generee avec path du data-route du form
+    let formLike = new FormData();
+    formLike.append("id", planteId);
+    axios.post(event.target.dataset.route, formLike, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+    }).then(function (response) { // Gérez la réponse du serveur (par exemple, actualisez l'interface utilisateur)
+      
+        // on rajoute la plante
+        if (response.data.rajoute) {
+            paniers.innerText = +paniers.innerText + 1;
+            alert("l article est bien ajoute au panier");
+        }
+        // on enleve la plante
+        else {
+       
+            console.log('probleme');
+
+        }
+
+    }).catch(function (error) {
+
+        if (error.response) {
+            if (error.response.status === 404) {
+                alert(error.response.data.message);
+            }
+        }
+
+    });
+
+}
+
+

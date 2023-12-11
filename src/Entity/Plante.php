@@ -79,10 +79,17 @@ class Plante
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $typePlante = null;
 
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    private $prix;
+
   
 
     #[ORM\OneToMany(mappedBy: 'plante', targetEntity: Image::class, orphanRemoval: true)]
     private Collection $images;
+
+    #[ORM\OneToMany(mappedBy: 'plante', targetEntity: DetailCommande::class, cascade: ['persist', 'remove'])]
+    private $details;
+
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'plantes')]
     private Collection $relation; // array de users
@@ -107,6 +114,7 @@ class Plante
         //$this->PlantesProfil = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->relation = new ArrayCollection();
+        $this->details = new ArrayCollection();
     }
     public function getId(): ?int
     {
@@ -353,6 +361,18 @@ class Plante
         return $this;
     }
 
+    public function getPrix(): ?string
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(?string $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
     
 
     /**
@@ -417,6 +437,37 @@ class Plante
     public function removeRelation(User $relation): static
     {
         $this->relation->removeElement($relation);
+
+        return $this;
+    }
+
+
+        /**
+     * @return Collection<int, DetailCommande>
+     */
+    public function getDetailsCommande(): Collection
+    {
+        return $this->details;
+    }
+
+    public function addDetail(DetailCommande $details): self
+    {
+        if (!$this->details->contains($details)) {
+            $this->details[] = $details;
+            $details->setPlante($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetail(DetailCommande $details): self
+    {
+        if ($this->details->removeElement($details)) {
+            // set the owning side to null (unless already changed)
+            if ($details->getPlante() === $this) {
+                $details->setPlante(null);
+            }
+        }
 
         return $this;
     }

@@ -55,9 +55,9 @@ class PlanteFixtures extends Fixture
                     'phSol' => $phSol[mt_rand(0, count($phSol) - 1)],
                     'croissance' => $croissance[mt_rand(0, count($croissance) - 1)],
                     'description' => "Une plante à l'allure très tendance et qui prendra une place prépondérante dans votre intérieur avec ses grandes feuilles. La plante était particulièrement populaire dans les années 70. Elle nous revient en force. 
-
-                    La plante est originaire d'Amérique du Sud et Centrale où elle peut grimper à des mètres de hauteur dans les arbres grâce à ses lianes. Ses feuilles peuvent quant à elles atteindre jusqu'à un mètre de large! C'est plutôt impressionnant si vous pouvez l'observer de vos yeux. La plante porte aussi de longs fruits avec une saveur tropicale unique. Une véritable explosion de saveur en bouche! Il est dommage que ces fruits soient absents sur la plante d'intérieur. J'aurais bien voulu y goûter moi-même...  ",
+                     La plante est originaire d'Amérique du Sud et Centrale où elle peut grimper à des mètres de hauteur dans les arbres grâce à ses lianes. Ses feuilles peuvent quant à elles atteindre jusqu'à un mètre de large! C'est plutôt impressionnant si vous pouvez l'observer de vos yeux. La plante porte aussi de longs fruits avec une saveur tropicale unique. Une véritable explosion de saveur en bouche! Il est dommage que ces fruits soient absents sur la plante d'intérieur. J'aurais bien voulu y goûter moi-même...  ",
                     'typePlante' => $typePlante[mt_rand(0, count($typePlante) - 1)],
+                    'prix' => mt_rand(2, 5),
 
 
                 ]
